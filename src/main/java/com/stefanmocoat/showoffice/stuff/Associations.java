@@ -8,12 +8,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+//import org.junit.jupiter.api.Test;
 
 public class Associations {
 
 	@Test
-	void test() {
+	public void test() {
 		TurnierObj t = new TurnierObj("Foo");
 
 		BewerbObj b1 = new BewerbObj("Bewerb 1");
@@ -41,7 +42,7 @@ public class Associations {
 
 		System.out.println(bewerbe);
 
-		Collections.sort(bewerbe, (o1, o2) -> {
+		bewerbe.sort((o1, o2) -> {
 			return o2.getName().compareTo(o1.getName());
 		});
 		System.out.println(bewerbe);

@@ -1,15 +1,14 @@
 package com.stefanmocoat.showoffice;
 
+import com.stefanmocoat.showoffice.jpa.entities.Bewerb;
+import com.stefanmocoat.showoffice.jpa.entities.BewerbKlasse;
+import com.stefanmocoat.showoffice.jpa.entities.KATEGORIE;
+import com.stefanmocoat.showoffice.jpa.entities.zns.TURIERBEZEICHNUNG;
+import com.stefanmocoat.showoffice.service.TurnierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.stefanmocoat.showoffice.jpa.entities.Bewerb;
-import com.stefanmocoat.showoffice.jpa.entities.BewerbKlasse;
-import com.stefanmocoat.showoffice.jpa.entities.Turnier;
-import com.stefanmocoat.showoffice.jpa.entities.TurnierKategorie;
-import com.stefanmocoat.showoffice.service.TurnierService;
 
 @SpringBootApplication
 public class ShowofficeApplication implements CommandLineRunner {
@@ -24,9 +23,9 @@ public class ShowofficeApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Turnier t1 = new Turnier();
+		/*TURIERBEZEICHNUNG t1 = new TURIERBEZEICHNUNG();
 		t1.setName("Dressur");
-		t1.setKategorie(TurnierKategorie.CDN_C);
+		t1.setKategorie(KATEGORIE.CDN_C);
 
 		Bewerb b1 = new Bewerb();
 		b1.setName("Dressur A");
@@ -40,14 +39,14 @@ public class ShowofficeApplication implements CommandLineRunner {
 
 		tournierService.add(t1);
 
-		Turnier t2 = new Turnier();
+		TURIERBEZEICHNUNG t2 = new TURIERBEZEICHNUNG();
 		t2.setName("Springen");
-		t2.setKategorie(TurnierKategorie.CSN_B);
+		t2.setKategorie(KATEGORIE.CSN_B);
 		tournierService.add(t2);
 
-		for (Turnier t : tournierService.findAll()) {
+		for (TURIERBEZEICHNUNG t : tournierService.findAll()) {
 			System.out.println(t);
-		}
+		}*/
 	}
 
 }

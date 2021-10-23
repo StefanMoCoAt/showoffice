@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stefanmocoat.showoffice.jpa.entities.Turnier;
+import com.stefanmocoat.showoffice.jpa.entities.TURIERBEZEICHNUNG;
 import com.stefanmocoat.showoffice.service.TurnierService;
 
 @Component
@@ -19,7 +19,7 @@ public class TurnierRestController {
 	TurnierService tournierService;
 
 	@GetMapping(path = "/{tournierId}")
-	public Turnier getById(@PathVariable Integer tournierId) {
+	public TURIERBEZEICHNUNG getById(@PathVariable Integer tournierId) {
 		return tournierService.findOne(tournierId);
 	}
 }
