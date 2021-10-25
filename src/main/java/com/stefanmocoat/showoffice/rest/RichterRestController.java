@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.Turnier;
-import com.stefanmocoat.showoffice.service.TurnierService;
+import com.stefanmocoat.showoffice.jpa.entities.zns.Richter;
+import com.stefanmocoat.showoffice.service.RichterService;
 
 @Component
 @RestController
-@RequestMapping("/turniere")
-public class TurnierRestController {
+@RequestMapping("/richter")
+public class RichterRestController {
 
 	@Autowired
-	TurnierService tournierService;
+	RichterService richterService;
 
-	@GetMapping(path = "/{tournierId}")
-	public Turnier getById(@PathVariable Integer tournierId) {
-		return tournierService.findOne(tournierId);
+	@GetMapping(path = "/{znsId}")
+	public Richter getById(@PathVariable String znsId) {
+		return richterService.findByZnsId(znsId);
 	}
 }

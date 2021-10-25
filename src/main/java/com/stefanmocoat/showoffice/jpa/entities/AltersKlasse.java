@@ -1,6 +1,6 @@
 package com.stefanmocoat.showoffice.jpa.entities;
 
-public enum ALTERSKLASSE {
+public enum AltersKlasse {
 
     JG("Jugendlicher"),
     JR("Junior"),
@@ -9,7 +9,7 @@ public enum ALTERSKLASSE {
 
     String werte;
 
-    ALTERSKLASSE(String werte) {
+    AltersKlasse(String werte) {
         this.werte = werte;
     }
 }

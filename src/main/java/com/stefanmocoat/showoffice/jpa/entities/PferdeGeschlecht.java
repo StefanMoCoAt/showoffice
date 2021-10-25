@@ -1,6 +1,6 @@
 package com.stefanmocoat.showoffice.jpa.entities;
 
-public enum PFERDE_GESCHLECHT {
+public enum PferdeGeschlecht {
 
     HENGST("H"),
     STUTE("S"),
@@ -8,7 +8,7 @@ public enum PFERDE_GESCHLECHT {
 
     String geschlecht;
 
-    PFERDE_GESCHLECHT(String geschlecht) {
+    PferdeGeschlecht(String geschlecht) {
         this.geschlecht = geschlecht;
     }
 

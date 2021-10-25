@@ -1,6 +1,6 @@
 package com.stefanmocoat.showoffice.jpa.entities;
 
-public enum KATEGORIE {
+public enum Kategorie {
 
 	CDN_AA("CDN-A*"),
 	CDN_A("CDN-A"),
@@ -11,7 +11,7 @@ public enum KATEGORIE {
 
 	final String name;
 
-	private KATEGORIE(String name) {
+	private Kategorie(String name) {
 		this.name = name;
 	}
 

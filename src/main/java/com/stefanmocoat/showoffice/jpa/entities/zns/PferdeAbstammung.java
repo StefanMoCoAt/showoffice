@@ -1,6 +1,6 @@
 package com.stefanmocoat.showoffice.jpa.entities.zns;
 
-public enum PFERDE_ABSTAMMUNG {
+public enum PferdeAbstammung {
 
     OESTERREICHISCHES_WARMBLUT("Österr. WB"),
     WESTFALE("Westfale"),
@@ -11,7 +11,7 @@ public enum PFERDE_ABSTAMMUNG {
 
     String abstammung;
 
-    PFERDE_ABSTAMMUNG(String abstammung) {
+    PferdeAbstammung(String abstammung) {
         this.abstammung = abstammung;
     }
 

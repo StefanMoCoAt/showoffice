@@ -1,6 +1,6 @@
 package com.stefanmocoat.showoffice.jpa.entities;
 
-public enum BUNDESLAND {
+public enum Bundesland {
 
     WIEN("01"),
     NIEDEROESTERREICH("02"),
@@ -15,7 +15,7 @@ public enum BUNDESLAND {
 
     String laedercode;
 
-    BUNDESLAND(String laedercode) {
+    Bundesland(String laedercode) {
         this.laedercode = laedercode;
     }
 

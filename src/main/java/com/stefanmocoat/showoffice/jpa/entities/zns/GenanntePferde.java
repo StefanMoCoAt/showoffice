@@ -1,7 +1,7 @@
 package com.stefanmocoat.showoffice.jpa.entities.zns;
 
-import com.stefanmocoat.showoffice.jpa.entities.PFERDE_GESCHLECHT;
-import com.stefanmocoat.showoffice.jpa.entities.PFERDE_FARBE;
+import com.stefanmocoat.showoffice.jpa.entities.PferdeGeschlecht;
+import com.stefanmocoat.showoffice.jpa.entities.PferdeFarbe;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class GENANNTE_PFERDE {
+public class GenanntePferde {
 
     @Id
     @GeneratedValue
@@ -25,16 +25,16 @@ public class GENANNTE_PFERDE {
     private Long LEBENSNUMMER;
 
     @Column(length = 1)
-    private PFERDE_GESCHLECHT GESCHLECHT;
+    private PferdeGeschlecht GESCHLECHT;
 
     @Column(length = 4)
     private Integer GEBURTS_JAHR; // FORMAT: 9999
 
     @Column(length = 15)
-    private PFERDE_FARBE FARBE;
+    private PferdeFarbe FARBE;
 
     @Column(length = 15)
-    private PFERDE_ABSTAMMUNG ABSTAMMUNG;
+    private PferdeAbstammung ABSTAMMUNG;
 
     @Column(length = 10)
     private String FEI_PASS;
@@ -54,7 +54,7 @@ public class GENANNTE_PFERDE {
     @Column(length = 10)
     private String SATZNUMMER_DES_PFERDES;
 
-    public GENANNTE_PFERDE() {
+    public GenanntePferde() {
     }
 
     @Override

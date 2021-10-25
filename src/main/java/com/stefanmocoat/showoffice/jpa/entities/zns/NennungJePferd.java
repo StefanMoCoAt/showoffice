@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class NENNUNG_JE_PFERD {
+public class NennungJePferd {
 
     @Id
     @GeneratedValue
@@ -48,7 +48,7 @@ public class NENNUNG_JE_PFERD {
     @Column(length = 10)
     private String SATZNUMMER_DES_PFERDES;
 
-    public NENNUNG_JE_PFERD() {
+    public NennungJePferd() {
     }
 
     @Override

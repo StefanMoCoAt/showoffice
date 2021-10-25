@@ -1,6 +1,6 @@
 package com.stefanmocoat.showoffice.jpa.entities;
 
-public enum PFERDE_FARBE {
+public enum PferdeFarbe {
 
     RAPPE("Rappe"),
     FUCHS("Fuchs"),
@@ -9,7 +9,7 @@ public enum PFERDE_FARBE {
 
     String pferde_farbe;
 
-    PFERDE_FARBE(String pferde_farbe) {
+    PferdeFarbe(String pferde_farbe) {
         this.pferde_farbe = pferde_farbe;
     }
 
