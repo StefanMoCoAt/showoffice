@@ -10,43 +10,43 @@ public class NennungJePferd {
 
     @Id
     @GeneratedValue
-    private Long nennung_je_pferd_ID;
+    private Long nennungJePferdID;
 
     @Column(length = 4)
-    private String KOPFNUMMER;
+    private String kopfnummer;
 
     @Column(length = 30)
-    private String PFERDENAME;
+    private String pferdename;
 
     @Column(length = 6)
-    private String SATZNUMMER_DES_REITERS;
+    private String satznummerDesReiters;
 
     @Column(length = 75)
-    private String REITER; // Familienname Vorname
+    private String reiter; // Familienname Vorname
 
     @Column(length = 2)
-    private Integer SPERRE_CODE; // siehe Nennliste. Der höchste Fehercode der bei den Bewerben aufgetreten ist, wird hier eingetragen. Teilnahmeberechtigung kontrollieren!
+    private Integer sperreCode; // siehe Nennliste. Der höchste Fehercode der bei den Bewerben aufgetreten ist, wird hier eingetragen. Teilnahmeberechtigung kontrollieren!
 
     @Column(length = 5)
-    private Integer ACCONTO; // 3 ganze Stellen, 2 Dezimalstellen ohne Kommazeichen BEITRAG DER MIT VERANSTALTER VERRECHNET WIRD
+    private Integer acconto; // 3 ganze Stellen, 2 Dezimalstellen ohne Kommazeichen BEITRAG DER MIT VERANSTALTER VERRECHNET WIRD
 
     @Column(length = 1)
-    private Integer STALL; // 0 = kein Stall, 2 Box bestellt Pro Pferd nur eine Box
+    private Integer stall; // 0 = kein Stall, 2 Box bestellt Pro Pferd nur eine Box
 
     @Column(length = 37)
-    private String GENANNTE_BEWERBE; // Bewerbe getrennt durch "," Bewerbnummer ohne vorlaufende Nullen, ohne Abteilungsnummer
+    private String genannteBewerbe; // Bewerbe getrennt durch "," Bewerbnummer ohne vorlaufende Nullen, ohne Abteilungsnummer
 
     @Column(length = 5)
-    private Integer BEZAHLT; // 3 ganze Stellen, 2 Dezimalstellen, ohne Kommazeichen. BETRAG DER VOM NENNER EINBEZAHLT WURDE (zu Kontrollzwecken)
+    private Integer bezahlt; // 3 ganze Stellen, 2 Dezimalstellen, ohne Kommazeichen. BETRAG DER VOM NENNER EINBEZAHLT WURDE (zu Kontrollzwecken)
 
     @Column(length = 6)
-    private String ERSATZREITER_SATZNUMMER;
+    private String ersatzreiterSatznummer;
 
     @Column(length = 75)
-    private String ERSATZREITER_FAMILIENNAME_VORNAME;
+    private String ersatzreiterFamiliennameVorname;
 
     @Column(length = 10)
-    private String SATZNUMMER_DES_PFERDES;
+    private String satznummerDesPferdes;
 
     public NennungJePferd() {
     }
@@ -54,19 +54,19 @@ public class NennungJePferd {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("NENNUNG_JE_PFERD{");
-        sb.append("nennung_je_pferd_ID=").append(nennung_je_pferd_ID);
-        sb.append(", KOPFNUMMER='").append(KOPFNUMMER).append('\'');
-        sb.append(", PFERDENAME='").append(PFERDENAME).append('\'');
-        sb.append(", SATZNUMMER_DES_REITERS='").append(SATZNUMMER_DES_REITERS).append('\'');
-        sb.append(", REITER='").append(REITER).append('\'');
-        sb.append(", SPERRE_CODE=").append(SPERRE_CODE);
-        sb.append(", ACCONTO=").append(ACCONTO);
-        sb.append(", STALL=").append(STALL);
-        sb.append(", GENANNTE_BEWERBE='").append(GENANNTE_BEWERBE).append('\'');
-        sb.append(", BEZAHLT=").append(BEZAHLT);
-        sb.append(", ERSATZREITER_SATZNUMMER='").append(ERSATZREITER_SATZNUMMER).append('\'');
-        sb.append(", ERSATZREITER_FAMILIENNAME_VORNAME='").append(ERSATZREITER_FAMILIENNAME_VORNAME).append('\'');
-        sb.append(", SATZNUMMER_DES_PFERDES='").append(SATZNUMMER_DES_PFERDES).append('\'');
+        sb.append("nennung_je_pferd_ID=").append(nennungJePferdID);
+        sb.append(", KOPFNUMMER='").append(kopfnummer).append('\'');
+        sb.append(", PFERDENAME='").append(pferdename).append('\'');
+        sb.append(", SATZNUMMER_DES_REITERS='").append(satznummerDesReiters).append('\'');
+        sb.append(", REITER='").append(reiter).append('\'');
+        sb.append(", SPERRE_CODE=").append(sperreCode);
+        sb.append(", ACCONTO=").append(acconto);
+        sb.append(", STALL=").append(stall);
+        sb.append(", GENANNTE_BEWERBE='").append(genannteBewerbe).append('\'');
+        sb.append(", BEZAHLT=").append(bezahlt);
+        sb.append(", ERSATZREITER_SATZNUMMER='").append(ersatzreiterSatznummer).append('\'');
+        sb.append(", ERSATZREITER_FAMILIENNAME_VORNAME='").append(ersatzreiterFamiliennameVorname).append('\'');
+        sb.append(", SATZNUMMER_DES_PFERDES='").append(satznummerDesPferdes).append('\'');
         sb.append('}');
         return sb.toString();
     }

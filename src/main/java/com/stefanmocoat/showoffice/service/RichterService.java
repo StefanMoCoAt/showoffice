@@ -1,41 +1,40 @@
 package com.stefanmocoat.showoffice.service;
 
-import java.util.List;
-
+import com.stefanmocoat.showoffice.jpa.entities.zns.Richter;
+import com.stefanmocoat.showoffice.jpa.repository.RichterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.Richter;
-import com.stefanmocoat.showoffice.jpa.repository.RichterRepository;
+import java.util.List;
 
 @Component
 public class RichterService {
 
-	@Autowired
-	RichterRepository repo;
+    @Autowired
+    RichterRepository richterRepository;
 
-	public List<Richter> findAll() {
-		return repo.findAll();
-	}
+    public List<Richter> findAll() {
+        return richterRepository.findAll();
+    }
 
-	public Richter findOne(long id) {
-		return repo.findById(id).orElse(null);
-	}
+    public Richter findOne(long id) {
+        return richterRepository.findById(id).orElse(null);
+    }
 
-	public Richter add(Richter Richter) {
-		return repo.save(Richter);
-	}
+    public Richter add(Richter richter) {
+        return richterRepository.save(richter);
+    }
 
-	public Richter update(Richter Richter) {
-		return repo.save(Richter);
-	}
+    public void update(Richter richter) {
+        richterRepository.save(richter);
+    }
 
-	public void delete(Richter Richter) {
-		repo.delete(Richter);
-	}
+    public void delete(Richter richter) {
+        richterRepository.delete(richter);
+    }
 
-	public Richter findByZnsId(String znsId) {
-		return repo.findByZnsId(znsId);
-	}
+    public Richter findByRichterId(String richterId) {
+        return richterRepository.findByRichterId(richterId);
+    }
 
 }

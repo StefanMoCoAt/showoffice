@@ -1,11 +1,11 @@
 package com.stefanmocoat.showoffice.jpa.entities.zns;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Bei import aus ZNS (Richter01.DAT) entspricht dies dem X-Satz.

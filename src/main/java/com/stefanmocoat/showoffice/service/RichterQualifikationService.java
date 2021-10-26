@@ -1,41 +1,40 @@
 package com.stefanmocoat.showoffice.service;
 
-import java.util.List;
-
+import com.stefanmocoat.showoffice.jpa.entities.zns.RichterQualifikation;
+import com.stefanmocoat.showoffice.jpa.repository.RichterQualifikationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.RichterQualifikation;
-import com.stefanmocoat.showoffice.jpa.repository.RichterQualifikationRepository;
+import java.util.List;
 
 @Component
 public class RichterQualifikationService {
 
-	@Autowired
-	RichterQualifikationRepository repo;
+    @Autowired
+    RichterQualifikationRepository richterQualifikationRepository;
 
-	public List<RichterQualifikation> findAll() {
-		return repo.findAll();
-	}
+    public List<RichterQualifikation> findAll() {
+        return richterQualifikationRepository.findAll();
+    }
 
-	public RichterQualifikation findOne(long id) {
-		return repo.findById(id).orElse(null);
-	}
+    public RichterQualifikation findOne(long id) {
+        return richterQualifikationRepository.findById(id).orElse(null);
+    }
 
-	public RichterQualifikation add(RichterQualifikation RichterQualifikation) {
-		return repo.save(RichterQualifikation);
-	}
+    public RichterQualifikation add(RichterQualifikation RichterQualifikation) {
+        return richterQualifikationRepository.save(RichterQualifikation);
+    }
 
-	public RichterQualifikation update(RichterQualifikation RichterQualifikation) {
-		return repo.save(RichterQualifikation);
-	}
+    public RichterQualifikation update(RichterQualifikation RichterQualifikation) {
+        return richterQualifikationRepository.save(RichterQualifikation);
+    }
 
-	public void delete(RichterQualifikation RichterQualifikation) {
-		repo.delete(RichterQualifikation);
-	}
+    public void delete(RichterQualifikation RichterQualifikation) {
+        richterQualifikationRepository.delete(RichterQualifikation);
+    }
 
-	public RichterQualifikation findByName(String name) {
-		return repo.findByName(name);
-	}
+    public RichterQualifikation findByName(String name) {
+        return richterQualifikationRepository.findByName(name);
+    }
 
 }

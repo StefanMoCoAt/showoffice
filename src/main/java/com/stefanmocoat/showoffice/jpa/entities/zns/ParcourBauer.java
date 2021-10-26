@@ -11,50 +11,50 @@ import javax.persistence.Id;
 @Entity
 public class ParcourBauer {
 
-	@Id
-	@GeneratedValue
-	private long id;
-	
-	@Column
-	// SATZNUMMER in ZNS
-	private String znsId;
+    @Id
+    @GeneratedValue
+    private long id;
 
-	@Column(length = 75)
-	private String name;
+    @Column
+    // SATZNUMMER in ZNS
+    private String znsId;
 
-	@Column(length = 30)
-	private String qualifikationen;
+    @Column(length = 75)
+    private String name;
 
-	public long getId() {
-		return id;
-	}
+    @Column(length = 30)
+    private String qualifikationen;
 
-	public void setId(long id) {
-		this.id = id;
-	}
-	
-	public String getZnsId() {
-		return znsId;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setZnsId(String znsRichterId) {
-		this.znsId = znsRichterId;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getZnsId() {
+        return znsId;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setZnsId(String znsRichterId) {
+        this.znsId = znsRichterId;
+    }
 
-	public String getQualifikationen() {
-		return qualifikationen;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setQualifikationen(String qualifikationen) {
-		this.qualifikationen = qualifikationen;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getQualifikationen() {
+        return qualifikationen;
+    }
+
+    public void setQualifikationen(String qualifikationen) {
+        this.qualifikationen = qualifikationen;
+    }
 
 }
