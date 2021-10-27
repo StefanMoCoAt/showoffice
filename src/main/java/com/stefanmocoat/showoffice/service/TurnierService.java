@@ -1,3 +1,4 @@
+/*
 package com.stefanmocoat.showoffice.service;
 
 import com.stefanmocoat.showoffice.jpa.entities.zns.Turnier;
@@ -38,3 +39,4 @@ public class TurnierService {
 //	}
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.stefanmocoat.showoffice.jpa.repository;
 
 import com.stefanmocoat.showoffice.jpa.entities.zns.Turnier;
@@ -9,4 +10,4 @@ public interface TurnierRepository extends JpaRepository<Turnier, Integer> {
 
 //	Turnier findByName(String name);
 
-}
+}*/

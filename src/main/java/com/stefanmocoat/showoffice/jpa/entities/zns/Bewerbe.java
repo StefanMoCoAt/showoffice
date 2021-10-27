@@ -1,3 +1,4 @@
+/*
 package com.stefanmocoat.showoffice.jpa.entities.zns;
 
 import com.stefanmocoat.showoffice.jpa.entities.Kategorie;
@@ -115,3 +116,4 @@ public class Bewerbe {
     }
 
 }
+*/

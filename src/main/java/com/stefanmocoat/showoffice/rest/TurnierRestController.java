@@ -1,3 +1,4 @@
+/*
 package com.stefanmocoat.showoffice.rest;
 
 import com.stefanmocoat.showoffice.jpa.entities.zns.Turnier;
@@ -22,3 +23,4 @@ public class TurnierRestController {
         return tournierService.findOne(tournierId);
     }
 }
+*/

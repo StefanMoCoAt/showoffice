@@ -1,3 +1,4 @@
+/*
 package com.stefanmocoat.showoffice.jpa.entities.zns;
 
 import com.stefanmocoat.showoffice.jpa.entities.Kategorie;
@@ -7,10 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+*/
 /**
  * TURNIERBEZEICHNUNG A-SATZ OEPS Pflichtenhelft 2021 V2.4
  * n2-XXXXX.dat(Nenndaten)
- */
+ *//*
+
 @Entity
 public class Turnier {
 
@@ -110,7 +113,8 @@ public class Turnier {
 //	}
 
     // TODO Bewerbe Liste neu implementieren an geeigneter stelle
-    /*
+    */
+/*
      * @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch =
      * FetchType.EAGER)
      *
@@ -124,5 +128,7 @@ public class Turnier {
      * public void addBewerb(Bewerb b) { bewerbe.add(b); }
      *
      * public void removeBewerb(Bewerb b) { bewerbe.remove(b); }
-     */
+     *//*
+
 }
+*/

@@ -72,8 +72,8 @@ public class Reiter {
     @Column
     private String lizenzinfo;
 
-    @Transient
-    private String fullName;
+/*    @Transient
+    private String fullName;*/
 
     // Getter Setter
     public String getFullName() {

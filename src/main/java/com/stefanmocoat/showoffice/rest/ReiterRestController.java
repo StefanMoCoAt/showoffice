@@ -22,7 +22,7 @@ public class ReiterRestController {
             @PathVariable
             String reitername
     ) {
-        return reiterService.findByFullName(reitername);
+        return reiterService.findByFamilienname(reitername);
     }
 
 }

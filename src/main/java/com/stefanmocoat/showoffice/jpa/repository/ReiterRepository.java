@@ -9,7 +9,9 @@ public interface ReiterRepository extends JpaRepository<Reiter, Long> {
 
     Reiter findBySatzNrReiter(String satzNrReiter);
 
-    Reiter findByFullName(String fullName);
+    Reiter findAllByFamilienname(String reiterFamilienname);
+
+//    Reiter findByFullName(String fullName);
 
     Reiter findByMitgliedsnummer(String mitgliedsNr);
 

@@ -1,3 +1,4 @@
+/*
 package com.stefanmocoat.showoffice.jpa.repository;
 
 import com.stefanmocoat.showoffice.jpa.entities.Bewerb;
@@ -9,4 +10,4 @@ public interface BewerbRepository extends JpaRepository<Bewerb, Integer> {
 
     Bewerb findByName(String name);
 
-}
+}*/

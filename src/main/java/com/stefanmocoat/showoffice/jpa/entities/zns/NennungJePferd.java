@@ -1,3 +1,4 @@
+/*
 package com.stefanmocoat.showoffice.jpa.entities.zns;
 
 import javax.persistence.Column;
@@ -71,3 +72,4 @@ public class NennungJePferd {
         return sb.toString();
     }
 }
+*/

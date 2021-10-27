@@ -1,3 +1,4 @@
+/*
 package com.stefanmocoat.showoffice.jpa.entities.zns;
 
 import com.stefanmocoat.showoffice.jpa.entities.AltersKlasse;
@@ -9,9 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 
+*/
 /**
  * GENANNTE TEILNEHMER Kopfzeile "RREITERLISTE" OEPS Pflichtenhelft 2021 V2.4
- */
+ *//*
+
 
 @Entity
 public class GenannteTeilnehmer {
@@ -230,3 +233,4 @@ public class GenannteTeilnehmer {
     }
 
 }
+*/

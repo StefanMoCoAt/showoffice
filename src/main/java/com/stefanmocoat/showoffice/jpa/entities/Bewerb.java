@@ -1,18 +1,10 @@
+/*
 package com.stefanmocoat.showoffice.jpa.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-@Entity
 public class Bewerb {
 
-    @Id
-    @GeneratedValue
     private int id;
 
-    @Column(length = 60)
     private String name;
 
     private BewerbKlasse klasse;
@@ -47,3 +39,4 @@ public class Bewerb {
     }
 
 }
+*/

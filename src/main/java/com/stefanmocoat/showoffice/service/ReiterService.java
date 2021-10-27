@@ -21,8 +21,8 @@ public class ReiterService {
         return reiterRepository.findBySatzNrReiter(satznummer);
     }
 
-    public Reiter findByFullName(String name) {
-        return reiterRepository.findByFullName(name);
+    public Reiter findByFamilienname(String name) {
+        return reiterRepository.findAllByFamilienname(name);
     }
 
     public Reiter findByMitgliedsNummer(String mitgliedsNr) {

@@ -41,5 +41,4 @@ public class VereinService {
         repository.delete(verein);
     }
 
-
 }
