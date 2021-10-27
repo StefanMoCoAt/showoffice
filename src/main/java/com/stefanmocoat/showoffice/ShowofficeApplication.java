@@ -87,33 +87,33 @@ public class ShowofficeApplication implements CommandLineRunner {
     private void importReiter() {
         try {
             BufferedReader reader = new BufferedReader(
-                    new FileReader("src/main/resources/import/LIZENZ01.dat", Charset.forName("IBM850")));
+                    new FileReader("zns_daten/LIZENZ01.dat", Charset.forName("Cp850")));
             String line = reader.readLine();
             while (line != null) {
                 if (!(line.length() > 201)) {
                     line = reader.readLine();
                     continue;
                 }
-                String reiterSatzNrReiter = line.substring(0, 6);
-                String reiterFamilienname = line.substring(6, 57);
-                String reiterVorname = line.substring(57, 81);
-                String reiterBudesland = line.substring(81, 83);
-                String reiterVereinsname = line.substring(83, 133);
-                String reiterNationalitaet = line.substring(133, 137);
-                String reiterlizenz = line.substring(137, 141);
-                String reiterStartkarte = line.substring(141, 142);
-                String reiterFahrlizenz = line.substring(142, 144);
-                String reiterAltersKlJgJrU25 = line.substring(144, 146);
-                String reiterAltersKlY = line.substring(146, 147);
-                String reiterMitgliedsnummer = line.substring(147, 155);
-                String reiterTelefonnummer = line.substring(155, 176);
-                String reiterKader = line.substring(176, 177);
-                String reiterLetzteZahlungJahr = line.substring(177, 181);
-                String reiterGeschlecht = line.substring(181, 182);
-                String reiterGeburtsdatum = line.substring(182, 190);
-                String reiterFeiId = line.substring(190, 200);
-                String reiterSperrliste = line.substring(200, 201);
-                String reiterLizenzinfo = line.substring(201);
+                String reiterSatzNrReiter = line.substring(0, 6); // 6
+                String reiterFamilienname = line.substring(6, 56).trim(); // 50
+                String reiterVorname = line.substring(56, 81).trim(); // 25
+                String reiterBudesland = line.substring(81, 83); // 2
+                String reiterVereinsname = line.substring(83, 133).trim(); // 50
+                String reiterNationalitaet = line.substring(133, 136); // 3
+                String reiterlizenz = line.substring(136, 140).trim(); // 4
+                String reiterStartkarte = line.substring(140, 141).trim(); // 1
+                String reiterFahrlizenz = line.substring(141, 143).trim(); // 2
+                String reiterAltersKlJgJrU25 = line.substring(143, 145).trim(); // 2
+                String reiterAltersKlY = line.substring(145, 146).trim(); // 1
+                String reiterMitgliedsnummer = line.substring(146, 154); // 8
+                String reiterTelefonnummer = line.substring(154, 175).trim(); // 21
+                String reiterKader = line.substring(175, 176).trim(); // 1
+                String reiterLetzteZahlungJahr = line.substring(176, 180); // 4
+                String reiterGeschlecht = line.substring(180, 181); // 1
+                String reiterGeburtsdatum = line.substring(181, 189); //8
+                String reiterFeiId = line.substring(189, 199); // 10
+                String reiterSperrliste = line.substring(199, 200); // 1
+                String reiterLizenzinfo = line.substring(200).trim(); // 10
 
                 addReiter(reiterSatzNrReiter, reiterFamilienname, reiterVorname, reiterBudesland,
                         reiterVereinsname, reiterNationalitaet, reiterlizenz, reiterStartkarte, reiterFahrlizenz,
@@ -172,7 +172,7 @@ public class ShowofficeApplication implements CommandLineRunner {
     private void importPferd() {
         try {
             BufferedReader reader = new BufferedReader(
-                    new FileReader("src/main/resources/import/PFERDE01.dat", Charset.forName("Cp852")));
+                    new FileReader("zns_daten/PFERDE01.dat", Charset.forName("Cp850")));
             String line = reader.readLine();
             while (line != null) {
                 String pferdKopfnummer = line.substring(0, 4);
@@ -235,7 +235,7 @@ public class ShowofficeApplication implements CommandLineRunner {
     private void importVerein() {
         try {
             BufferedReader reader = new BufferedReader(
-                    new FileReader("src/main/resources/import/VEREIN01.dat", Charset.forName("Cp852")));
+                    new FileReader("zns_daten/VEREIN01.dat", Charset.forName("Cp850")));
             String line = reader.readLine();
             while (line != null) {
                 String vereinNr = line.substring(0, 4);
@@ -271,7 +271,7 @@ public class ShowofficeApplication implements CommandLineRunner {
 
     private void importRichterAndParcourBauer() {
         try (BufferedReader reader = new BufferedReader(
-                new FileReader("src/main/resources/import/RICHT01.dat", Charset.forName("Cp852")))) {
+                new FileReader("zns_daten/RICHT01.dat", Charset.forName("Cp850")))) {
             String line = reader.readLine();
             while (line != null) {
                 String satzNr = line.substring(0, 1);
