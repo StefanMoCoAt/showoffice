@@ -1,8 +1,6 @@
-package com.stefanmocoat.showoffice.jpa.entities.zns.pferde;
+package com.stefanmocoat.showoffice.jpa.entities.zns.pferd;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer.ParcoursBauer;
-import com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer.ParcoursBauerQualifikation;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

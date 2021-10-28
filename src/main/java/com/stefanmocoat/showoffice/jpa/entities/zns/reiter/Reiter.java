@@ -1,4 +1,4 @@
-package com.stefanmocoat.showoffice.jpa.entities.zns;
+package com.stefanmocoat.showoffice.jpa.entities.zns.reiter;
 
 import javax.persistence.*;
 

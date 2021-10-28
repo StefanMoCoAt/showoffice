@@ -21,16 +21,16 @@ public class RichterQualifikationService {
         return richterQualifikationRepository.findById(id).orElse(null);
     }
 
-    public RichterQualifikation add(RichterQualifikation RichterQualifikation) {
-        return richterQualifikationRepository.save(RichterQualifikation);
+    public RichterQualifikation add(RichterQualifikation richterQualifikation) {
+        return richterQualifikationRepository.save(richterQualifikation);
     }
 
-    public RichterQualifikation update(RichterQualifikation RichterQualifikation) {
-        return richterQualifikationRepository.save(RichterQualifikation);
+    public RichterQualifikation update(RichterQualifikation richterQualifikation) {
+        return richterQualifikationRepository.save(richterQualifikation);
     }
 
-    public void delete(RichterQualifikation RichterQualifikation) {
-        richterQualifikationRepository.delete(RichterQualifikation);
+    public void delete(RichterQualifikation richterQualifikation) {
+        richterQualifikationRepository.delete(richterQualifikation);
     }
 
     public RichterQualifikation findByName(String name) {

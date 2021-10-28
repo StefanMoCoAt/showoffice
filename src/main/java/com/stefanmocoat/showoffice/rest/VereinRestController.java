@@ -1,6 +1,6 @@
 package com.stefanmocoat.showoffice.rest;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.Verein;
+import com.stefanmocoat.showoffice.jpa.entities.zns.verein.Verein;
 import com.stefanmocoat.showoffice.service.VereinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -16,16 +16,10 @@ public class Richter {
     private long id;
 
     @Column
-    // SATZNUMMER in ZNS
     private String richterId;
 
     @Column(length = 75)
     private String name;
-
-    private Date birthday;
-
-    @Transient
-    private int age;
 
     @OneToMany(mappedBy = "richter", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RichterQualAssignment> qualAssignments = new ArrayList<>();
@@ -54,25 +48,6 @@ public class Richter {
         this.name = name;
     }
 
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    @PostLoad
-    protected void postLoad() {
-        long timeBetween = new Date().getTime() - getBirthday().getTime();
-        double yearsBetween = timeBetween / 3.15576e+10;
-        age = (int) Math.floor(yearsBetween);
-    }
-
-    public int getAge() {
-        return age;
-    }
-
     public List<RichterQualAssignment> getQualAssignments() {
         return qualAssignments;
     }
@@ -80,5 +55,4 @@ public class Richter {
     public void setQualAssignments(List<RichterQualAssignment> qualAssignments) {
         this.qualAssignments = qualAssignments;
     }
-
 }

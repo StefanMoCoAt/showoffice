@@ -1,6 +1,5 @@
-package com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer;
+package com.stefanmocoat.showoffice.jpa.entities.zns.reiter;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.Reiter;
 import com.stefanmocoat.showoffice.service.ReiterService;
 
 import java.io.BufferedReader;

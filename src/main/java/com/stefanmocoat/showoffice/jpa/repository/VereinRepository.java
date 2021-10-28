@@ -1,6 +1,6 @@
 package com.stefanmocoat.showoffice.jpa.repository;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.Verein;
+import com.stefanmocoat.showoffice.jpa.entities.zns.verein.Verein;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

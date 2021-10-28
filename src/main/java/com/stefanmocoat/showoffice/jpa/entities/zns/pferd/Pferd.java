@@ -1,4 +1,4 @@
-package com.stefanmocoat.showoffice.jpa.entities.zns.pferde;
+package com.stefanmocoat.showoffice.jpa.entities.zns.pferd;
 
 import javax.persistence.*;
 

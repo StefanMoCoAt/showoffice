@@ -1,9 +1,8 @@
 package com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Bei import aus ZNS (Richter01.DAT) entspricht dies dem Y-Satz.
@@ -16,14 +15,13 @@ public class ParcoursBauer {
     private long id;
 
     @Column
-    // SATZNUMMER in ZNS
-    private String znsId;
+    private String parcousBauerId;
 
-    @Column(length = 75)
+    @Column
     private String name;
 
-    @Column(length = 30)
-    private String qualifikationen;
+    @OneToMany(mappedBy = "parcoursBauer", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ParcoursBauerQualAssignment> qualAssignments = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -33,12 +31,12 @@ public class ParcoursBauer {
         this.id = id;
     }
 
-    public String getZnsId() {
-        return znsId;
+    public String getParcousBauerId() {
+        return parcousBauerId;
     }
 
-    public void setZnsId(String znsRichterId) {
-        this.znsId = znsRichterId;
+    public void setParcousBauerId(String znsRichterId) {
+        this.parcousBauerId = znsRichterId;
     }
 
     public String getName() {
@@ -49,12 +47,11 @@ public class ParcoursBauer {
         this.name = name;
     }
 
-    public String getQualifikationen() {
-        return qualifikationen;
+    public List<ParcoursBauerQualAssignment> getQualAssignments() {
+        return qualAssignments;
     }
 
-    public void setQualifikationen(String qualifikationen) {
-        this.qualifikationen = qualifikationen;
+    public void setQualAssignments(List<ParcoursBauerQualAssignment> qualAssignments) {
+        this.qualAssignments = qualAssignments;
     }
-
 }
