@@ -1,6 +1,6 @@
 package com.stefanmocoat.showoffice.jpa.repository;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.Richter;
+import com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer.Richter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,10 +1,9 @@
 package com.stefanmocoat.showoffice.service;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.Pferd;
+import com.stefanmocoat.showoffice.jpa.entities.zns.pferde.Pferd;
 import com.stefanmocoat.showoffice.jpa.repository.PferdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
