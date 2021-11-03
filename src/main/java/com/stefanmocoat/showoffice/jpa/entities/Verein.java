@@ -1,8 +1,6 @@
-package com.stefanmocoat.showoffice.jpa.entities.zns.verein;
+package com.stefanmocoat.showoffice.jpa.entities;
 
 import javax.persistence.*;
-
-import com.stefanmocoat.showoffice.jpa.entities.AbstractEntity;
 
 @Entity
 public class Verein extends AbstractEntity {

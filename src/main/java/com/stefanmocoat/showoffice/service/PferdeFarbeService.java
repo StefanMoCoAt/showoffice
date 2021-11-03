@@ -1,6 +1,6 @@
 package com.stefanmocoat.showoffice.service;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.pferd.PferdeFarbe;
+import com.stefanmocoat.showoffice.jpa.entities.PferdeFarbe;
 import com.stefanmocoat.showoffice.jpa.repository.PferdRepository;
 import com.stefanmocoat.showoffice.jpa.repository.PferdeFarbeRepository;
 

@@ -7,8 +7,8 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.reiter.Reiter;
-import com.stefanmocoat.showoffice.jpa.entities.zns.verein.Verein;
+import com.stefanmocoat.showoffice.jpa.entities.Reiter;
+import com.stefanmocoat.showoffice.jpa.entities.Verein;
 import com.stefanmocoat.showoffice.service.ReiterService;
 import com.stefanmocoat.showoffice.service.VereinService;
 

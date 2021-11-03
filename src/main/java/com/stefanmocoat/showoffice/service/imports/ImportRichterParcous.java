@@ -7,12 +7,12 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer.ParcoursBauer;
-import com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer.ParcoursBauerQualAssignment;
-import com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer.ParcoursBauerQualifikation;
-import com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer.Richter;
-import com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer.RichterQualAssignment;
-import com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer.RichterQualifikation;
+import com.stefanmocoat.showoffice.jpa.entities.ParcoursBauer;
+import com.stefanmocoat.showoffice.jpa.entities.ParcoursBauerQualAssignment;
+import com.stefanmocoat.showoffice.jpa.entities.ParcoursBauerQualifikation;
+import com.stefanmocoat.showoffice.jpa.entities.Richter;
+import com.stefanmocoat.showoffice.jpa.entities.RichterQualAssignment;
+import com.stefanmocoat.showoffice.jpa.entities.RichterQualifikation;
 import com.stefanmocoat.showoffice.service.ParcoursBauerQualifikationService;
 import com.stefanmocoat.showoffice.service.ParcoursBauerService;
 import com.stefanmocoat.showoffice.service.RichterQualifikationService;

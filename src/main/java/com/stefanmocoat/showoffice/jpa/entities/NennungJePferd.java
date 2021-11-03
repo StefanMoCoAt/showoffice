@@ -1,3 +1,4 @@
+package com.stefanmocoat.showoffice.jpa.entities;
 /*
 package com.stefanmocoat.showoffice.jpa.entities.zns;
 

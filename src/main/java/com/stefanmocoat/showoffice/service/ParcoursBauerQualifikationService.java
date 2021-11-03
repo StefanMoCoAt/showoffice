@@ -1,6 +1,6 @@
 package com.stefanmocoat.showoffice.service;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer.ParcoursBauerQualifikation;
+import com.stefanmocoat.showoffice.jpa.entities.ParcoursBauerQualifikation;
 import com.stefanmocoat.showoffice.jpa.repository.ParcoursBauerQualifikationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

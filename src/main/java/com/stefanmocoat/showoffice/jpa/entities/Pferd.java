@@ -1,12 +1,10 @@
-package com.stefanmocoat.showoffice.jpa.entities.zns.pferd;
+package com.stefanmocoat.showoffice.jpa.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.stefanmocoat.showoffice.jpa.entities.AbstractEntity;
-import com.stefanmocoat.showoffice.jpa.entities.zns.verein.Verein;
 
 /**
  * Import PFERD01.DAT

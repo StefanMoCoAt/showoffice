@@ -1,4 +1,4 @@
-package com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer;
+package com.stefanmocoat.showoffice.jpa.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

@@ -1,10 +1,8 @@
-package com.stefanmocoat.showoffice.jpa.entities.zns.reiter;
+package com.stefanmocoat.showoffice.jpa.entities;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.stefanmocoat.showoffice.jpa.entities.AbstractEntity;
-import com.stefanmocoat.showoffice.jpa.entities.zns.verein.Verein;
 
 /**
  * Import LIZENZ01.DAT

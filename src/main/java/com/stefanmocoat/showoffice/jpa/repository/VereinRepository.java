@@ -1,8 +1,9 @@
 package com.stefanmocoat.showoffice.jpa.repository;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.verein.Verein;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.stefanmocoat.showoffice.jpa.entities.Verein;
 
 @Repository
 public interface VereinRepository extends JpaRepository<Verein, Long> {

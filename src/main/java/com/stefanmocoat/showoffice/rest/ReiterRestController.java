@@ -1,6 +1,6 @@
 package com.stefanmocoat.showoffice.rest;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.reiter.Reiter;
+import com.stefanmocoat.showoffice.jpa.entities.Reiter;
 import com.stefanmocoat.showoffice.service.ReiterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

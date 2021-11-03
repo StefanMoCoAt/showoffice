@@ -11,9 +11,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.pferd.Pferd;
-import com.stefanmocoat.showoffice.jpa.entities.zns.pferd.PferdeFarbe;
-import com.stefanmocoat.showoffice.jpa.entities.zns.verein.Verein;
+import com.stefanmocoat.showoffice.jpa.entities.Pferd;
+import com.stefanmocoat.showoffice.jpa.entities.PferdeFarbe;
+import com.stefanmocoat.showoffice.jpa.entities.Verein;
 import com.stefanmocoat.showoffice.service.PferdService;
 import com.stefanmocoat.showoffice.service.PferdeFarbeService;
 import com.stefanmocoat.showoffice.service.ReiterService;

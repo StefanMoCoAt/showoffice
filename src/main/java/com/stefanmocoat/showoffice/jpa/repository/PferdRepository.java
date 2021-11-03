@@ -1,8 +1,9 @@
 package com.stefanmocoat.showoffice.jpa.repository;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.pferd.Pferd;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.stefanmocoat.showoffice.jpa.entities.Pferd;
 
 @Repository
 public interface PferdRepository extends JpaRepository<Pferd, Long> {

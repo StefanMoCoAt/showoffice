@@ -1,4 +1,4 @@
-package com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer;
+package com.stefanmocoat.showoffice.jpa.entities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-
-import com.stefanmocoat.showoffice.jpa.entities.AbstractEntity;
 
 /**
  * Bei import aus ZNS (Richter01.DAT) entspricht dies dem X-Satz.

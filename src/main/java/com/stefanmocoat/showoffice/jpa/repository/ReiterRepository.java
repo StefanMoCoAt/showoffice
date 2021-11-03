@@ -1,7 +1,8 @@
 package com.stefanmocoat.showoffice.jpa.repository;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.reiter.Reiter;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.stefanmocoat.showoffice.jpa.entities.Reiter;
 
 public interface ReiterRepository extends JpaRepository<Reiter, Long> {
 
