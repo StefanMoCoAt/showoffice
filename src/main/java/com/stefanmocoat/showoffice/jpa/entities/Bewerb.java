@@ -1,42 +1,98 @@
-/*
 package com.stefanmocoat.showoffice.jpa.entities;
 
-public class Bewerb {
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-    private int id;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
-    private String name;
+@Entity
+public class Bewerb extends AbstractEntity {
 
-    private BewerbKlasse klasse;
+	private String nummer;
 
-    public int getId() {
-        return id;
-    }
+	private int abteilung;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	private String name;
 
-    public String getName() {
-        return name;
-    }
+	private Klasse klasse;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	private Kategorie kategorie;
 
-    public BewerbKlasse getKlasse() {
-        return klasse;
-    }
+	private Date datum;
 
-    public void setKlasse(BewerbKlasse klasse) {
-        this.klasse = klasse;
-    }
+	private String subNummer;
 
-    @Override
-    public String toString() {
-        return "Bewerb [id=" + id + ", name=" + name + ", klasse=" + klasse + "]";
-    }
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@JoinColumn(name = "bewerb_ID")
+	private Set<Paarung> paarungen = new HashSet<>();
+
+	public String getNummer() {
+		return nummer;
+	}
+
+	public void setNummer(String nummer) {
+		this.nummer = nummer;
+	}
+
+	public int getAbteilung() {
+		return abteilung;
+	}
+
+	public void setAbteilung(int abteilung) {
+		this.abteilung = abteilung;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Klasse getKlasse() {
+		return klasse;
+	}
+
+	public void setKlasse(Klasse klasse) {
+		this.klasse = klasse;
+	}
+
+	public Kategorie getKategorie() {
+		return kategorie;
+	}
+
+	public void setKategorie(Kategorie kategorie) {
+		this.kategorie = kategorie;
+	}
+
+	public Date getDatum() {
+		return datum;
+	}
+
+	public void setDatum(Date datum) {
+		this.datum = datum;
+	}
+
+	public String getSubNummer() {
+		return subNummer;
+	}
+
+	public void setSubNummer(String subNummer) {
+		this.subNummer = subNummer;
+	}
+
+	public Set<Paarung> getPaarungen() {
+		return paarungen;
+	}
+
+	public void setPaarungen(Set<Paarung> paarungen) {
+		this.paarungen = paarungen;
+	}
 
 }
-*/

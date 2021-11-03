@@ -11,12 +11,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.stefanmocoat.showoffice.jpa.entities.Bewerb;
+import com.stefanmocoat.showoffice.jpa.entities.Kategorie;
+import com.stefanmocoat.showoffice.jpa.entities.Paarung;
 import com.stefanmocoat.showoffice.jpa.entities.Pferd;
 import com.stefanmocoat.showoffice.jpa.entities.PferdeFarbe;
+import com.stefanmocoat.showoffice.jpa.entities.Reiter;
+import com.stefanmocoat.showoffice.jpa.entities.Turnier;
 import com.stefanmocoat.showoffice.jpa.entities.Verein;
 import com.stefanmocoat.showoffice.service.PferdService;
 import com.stefanmocoat.showoffice.service.PferdeFarbeService;
 import com.stefanmocoat.showoffice.service.ReiterService;
+import com.stefanmocoat.showoffice.service.TurnierService;
 import com.stefanmocoat.showoffice.service.VereinService;
 import com.stefanmocoat.showoffice.service.imports.ImportReiter;
 import com.stefanmocoat.showoffice.service.imports.ImportRichterParcous;
@@ -48,6 +54,9 @@ public class ShowofficeApplication implements CommandLineRunner {
 	@Autowired
 	ReiterService reiterService;
 
+	@Autowired
+	TurnierService turnierService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ShowofficeApplication.class, args);
 	}
@@ -61,6 +70,8 @@ public class ShowofficeApplication implements CommandLineRunner {
 		importReiter.doImport();
 
 		importPferd();
+		
+		importTurnier();
 
 		/*
 		 * TURIERBEZEICHNUNG t1 = new TURIERBEZEICHNUNG(); t1.setName("Dressur");
@@ -118,7 +129,7 @@ public class ShowofficeApplication implements CommandLineRunner {
 			pferdeFarbe.setFarbe(trimmedQual);
 			pferdeFarbeService.add(pferdeFarbe);
 		}
-		
+
 		return pferdeFarbeService.findByFarbe(farbe);
 	}
 
@@ -219,4 +230,62 @@ public class ShowofficeApplication implements CommandLineRunner {
 		}
 	}
 
+	private void importTurnier() {
+
+		Turnier t = new Turnier();
+		t.setNumber("123456789");
+		t.setName("Test");
+		t.setOrt("Wien");
+		t.getKategorien().add(Kategorie.CDN_A);
+		t.getKategorien().add(Kategorie.CDN_B);
+
+		Bewerb b1 = new Bewerb();
+		b1.setName("B1");
+
+		Bewerb b2 = new Bewerb();
+		b2.setName("B2");
+
+		t.getBewerbe().add(b1);
+		t.getBewerbe().add(b2);
+
+		Pferd pferd = pferdService.findByKopfnummer("9D56");
+		Reiter reiter = reiterService.findBySatzNrReiter("010016");
+		Paarung p1 = new Paarung();
+		p1.setPferd(pferd);
+		p1.setReiter(reiter);
+
+		b1.getPaarungen().add(p1);
+
+		turnierService.add(t);
+
+		Turnier t2 = turnierService.findByNumber(t.getNumber());
+
+		System.out.println(t2);
+
+//		try (BufferedReader reader = new BufferedReader(new FileReader("zns_daten/PFERDE01_TEST.dat"))) {
+//			String line = reader.readLine();
+//			while (line != null) {
+//				String pferdKopfnummer = line.substring(0, 4);
+//				String pferdPferdename = line.substring(4, 34).trim();
+//				String pferdLebensnummer = line.substring(34, 43);
+//				String pferdGeschlecht = line.substring(43, 44);
+//				String pferdGebJahr = line.substring(44, 48);
+//				String pferdFarbe = line.substring(48, 63).trim();
+//				String pferdAbstammung = line.substring(63, 78).trim();
+//				String pferdVereinNr = line.substring(78, 82);
+//				String pferdLetzteZahlungJahr = line.substring(82, 86);
+//				String pferdVerantwortlichePerson = line.substring(86, 161).trim();
+//				String pferdVater = line.substring(161, 191).trim();
+//				String pferdFeiPass = line.substring(191, 199).trim();
+//				String pferdSatznummerDesPferdes = line.substring(199).trim();
+//
+//				addPferd(pferdKopfnummer, pferdPferdename, pferdLebensnummer, pferdGeschlecht, pferdGebJahr, pferdFarbe,
+//						pferdAbstammung, pferdVereinNr, pferdLetzteZahlungJahr, pferdVerantwortlichePerson, pferdVater,
+//						pferdFeiPass, pferdSatznummerDesPferdes);
+//				line = reader.readLine();
+//			}
+//		} catch (IOException e) {
+//			throw new IllegalStateException(e);
+//		}
+	}
 }

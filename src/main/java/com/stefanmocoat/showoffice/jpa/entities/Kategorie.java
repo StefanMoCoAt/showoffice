@@ -2,7 +2,7 @@ package com.stefanmocoat.showoffice.jpa.entities;
 
 public enum Kategorie {
 
-    CDN_AA("CDN-A*"),
+	CDN_AA("CDN-A*"),
     CDN_A("CDN-A"),
     CDN_BB("CDN-B*"),
     CDN_B("CDN-B"),

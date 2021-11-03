@@ -1,135 +1,90 @@
 package com.stefanmocoat.showoffice.jpa.entities;
-/*
-package com.stefanmocoat.showoffice.jpa.entities.zns;
 
-import com.stefanmocoat.showoffice.jpa.entities.Kategorie;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-*/
-/**
- * TURNIERBEZEICHNUNG A-SATZ OEPS Pflichtenhelft 2021 V2.4
- * n2-XXXXX.dat(Nenndaten)
- *//*
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Turnier {
+public class Turnier extends AbstractEntity {
 
-    @Id
-    @GeneratedValue
-    private long id;
+	private String number;
 
-//	@Column(length = 1)
-//	private String ID = "A";
+	private String name;
 
-    @Column(length = 5)
-    private Integer turnierNr;
+	private String ort;
 
-    @Column(length = 25)
-    private String turnierNameOrt;
+	private Date von;
 
-    @Column(length = 8)
-    private Integer von;
+	private Date bis;
 
-    @Column(length = 8)
-    private Integer bis;
+	@ElementCollection(fetch = FetchType.EAGER)
+	private Set<Kategorie> kategorien = new HashSet<>();
 
-    @Column(length = 25)
-    private Kategorie KATEGORIE;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@JoinColumn(name = "turnier_ID")
+	private Set<Bewerb> bewerbe = new HashSet<>();
 
-    public Turnier() {
-    }
+	public String getNumber() {
+		return number;
+	}
 
-//	public String getID() {
-//		return ID;
-//	}
-//
-//	public void setID(String ID) {
-//		this.ID = ID;
-//	}
+	public void setNumber(String number) {
+		this.number = number;
+	}
 
-    public Integer getTurnierNr() {
-        return turnierNr;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setTurnierNr(Integer TURNIERNR) {
-        this.turnierNr = TURNIERNR;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getTurnierNameOrt() {
-        return turnierNameOrt;
-    }
+	public String getOrt() {
+		return ort;
+	}
 
-    public void setTurnierNameOrt(String TURNIERNAME_ORT) {
-        this.turnierNameOrt = TURNIERNAME_ORT;
-    }
+	public void setOrt(String ort) {
+		this.ort = ort;
+	}
 
-    public Integer getVon() {
-        return von;
-    }
+	public Date getVon() {
+		return von;
+	}
 
-    public void setVon(Integer VON) {
-        this.von = VON;
-    }
+	public void setVon(Date von) {
+		this.von = von;
+	}
 
-    public Integer getBis() {
-        return bis;
-    }
+	public Date getBis() {
+		return bis;
+	}
 
-    public void setBis(Integer BIS) {
-        this.bis = BIS;
-    }
+	public void setBis(Date bis) {
+		this.bis = bis;
+	}
 
-    public com.stefanmocoat.showoffice.jpa.entities.Kategorie getKATEGORIE() {
-        return KATEGORIE;
-    }
+	public Set<Kategorie> getKategorien() {
+		return kategorien;
+	}
 
-    public void setKATEGORIE(com.stefanmocoat.showoffice.jpa.entities.Kategorie KATEGORIE) {
-        this.KATEGORIE = KATEGORIE;
-    }
+	public void setKategorien(Set<Kategorie> kategorien) {
+		this.kategorien = kategorien;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public Set<Bewerb> getBewerbe() {
+		return bewerbe;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-//	@Override
-//	public String toString() {
-//		final StringBuilder sb = new StringBuilder("TURIERBEZEICHNUNG{");
-//		sb.append("turnierbezeichnung_ID=").append(id);
-//		sb.append(", ID='").append(ID).append('\'');
-//		sb.append(", TURNIERNR=").append(TURNIERNR);
-//		sb.append(", TURNIERNAME_ORT='").append(TURNIERNAME_ORT).append('\'');
-//		sb.append(", VON=").append(VON);
-//		sb.append(", BIS=").append(BIS);
-//		sb.append(", KATEGORIE=").append(KATEGORIE);
-//		sb.append('}');
-//		return sb.toString();
-//	}
-
-    // TODO Bewerbe Liste neu implementieren an geeigneter stelle
-    */
-/*
-     * @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch =
-     * FetchType.EAGER)
-     *
-     * @JoinColumn(name = "turnier_ID") private List<Bewerb> bewerbe = new
-     * ArrayList<>(); public List<Bewerb> getBewerbe() { return
-     * Collections.unmodifiableList(bewerbe); }
-     *
-     * // ATTENTION - used for jackson marshalling - do not use internal public void
-     * setBewerbe(List<Bewerb> bewerbe) { this.bewerbe = bewerbe; }
-     *
-     * public void addBewerb(Bewerb b) { bewerbe.add(b); }
-     *
-     * public void removeBewerb(Bewerb b) { bewerbe.remove(b); }
-     *//*
+	public void setBewerbe(Set<Bewerb> bewerbe) {
+		this.bewerbe = bewerbe;
+	}
 
 }
-*/

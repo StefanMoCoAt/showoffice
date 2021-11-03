@@ -1,12 +1,12 @@
 package com.stefanmocoat.showoffice.jpa.entities;
 
-public enum BewerbKlasse {
+public enum Klasse {
 
-    KLASSE_A("Klasse A"), KLASSE_L("Klasse L");
+    A("A"), L("L");
 
     final String name;
 
-    private BewerbKlasse(String name) {
+    private Klasse(String name) {
         this.name = name;
     }
 
