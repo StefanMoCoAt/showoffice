@@ -2,15 +2,15 @@ package com.stefanmocoat.showoffice.jpa.entities.zns.reiter;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.stefanmocoat.showoffice.jpa.entities.AbstractEntity;
+import com.stefanmocoat.showoffice.jpa.entities.zns.verein.Verein;
+
 /**
  * Import LIZENZ01.DAT
  */
 @Entity
-public class Reiter {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long reiterId;
+public class Reiter extends AbstractEntity {
 
     @Column
     private String satzNrReiter;
@@ -48,6 +48,10 @@ public class Reiter {
     @Column
     private String mitgliedsnummer;
 
+    @ManyToOne
+	@JsonIgnore
+	private Verein verein;
+    
     @Column
     private String telefonnummer;
 
@@ -78,10 +82,6 @@ public class Reiter {
     // Getter Setter
     public String getFullName() {
         return this.vorname.concat(" ").concat(this.familienname);
-    }
-
-    public long getId() {
-        return reiterId;
     }
 
     public String getSatzNrReiter() {
@@ -180,7 +180,15 @@ public class Reiter {
         this.mitgliedsnummer = mitgliedsnummer;
     }
 
-    public String getTelefonnummer() {
+    public Verein getVerein() {
+		return verein;
+	}
+
+	public void setVerein(Verein verein) {
+		this.verein = verein;
+	}
+
+	public String getTelefonnummer() {
         return telefonnummer;
     }
 

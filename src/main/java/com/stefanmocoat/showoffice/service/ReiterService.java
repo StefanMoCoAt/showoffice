@@ -17,7 +17,11 @@ public class ReiterService {
         return reiterRepository.findAll();
     }
 
-    public Reiter findOne(String satznummer) {
+    public Reiter findOne(long id) {
+        return reiterRepository.findById(id).orElse(null);
+    }
+    
+    public Reiter findBySatzNrReiter(String satznummer) {
         return reiterRepository.findBySatzNrReiter(satznummer);
     }
 

@@ -1,186 +1,204 @@
 package com.stefanmocoat.showoffice;
 
-import com.stefanmocoat.showoffice.jpa.entities.zns.pferd.Pferd;
-import com.stefanmocoat.showoffice.jpa.entities.zns.reiter.ImportReiter;
-import com.stefanmocoat.showoffice.jpa.entities.zns.richterPacoursbauer.ImportRichterParcous;
-import com.stefanmocoat.showoffice.jpa.entities.zns.verein.Verein;
-import com.stefanmocoat.showoffice.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.stefanmocoat.showoffice.jpa.entities.zns.pferd.Pferd;
+import com.stefanmocoat.showoffice.jpa.entities.zns.verein.Verein;
+import com.stefanmocoat.showoffice.service.PferdService;
+import com.stefanmocoat.showoffice.service.ReiterService;
+import com.stefanmocoat.showoffice.service.VereinService;
+import com.stefanmocoat.showoffice.service.imports.ImportReiter;
+import com.stefanmocoat.showoffice.service.imports.ImportRichterParcous;
+
 @SpringBootApplication
 public class ShowofficeApplication implements CommandLineRunner {
 
-    static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+	static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
- /*   @Autowired
-    TurnierService tournierService;*/
+	/*
+	 * @Autowired TurnierService tournierService;
+	 */
 
-    @Autowired
-    RichterService richterService;
+	@Autowired
+	ImportRichterParcous importRichterParcour;
 
-    @Autowired
-    RichterQualifikationService richterQualService;
+	@Autowired
+	ImportReiter importReiter;
 
-    @Autowired
-    ParcoursBauerService parcoursBauerService;
+	@Autowired
+	VereinService vereinService;
 
-    @Autowired
-    ParcoursBauerQualifikationService parcoursBauerQualService;
+	@Autowired
+	PferdService pferdService;
 
-    @Autowired
-    VereinService vereinService;
+	@Autowired
+	ReiterService reiterService;
 
-    @Autowired
-    PferdService pferdService;
+	public static void main(String[] args) {
+		SpringApplication.run(ShowofficeApplication.class, args);
+	}
 
-    @Autowired
-    ReiterService reiterService;
+	@Override
+	public void run(String... args) throws Exception {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ShowofficeApplication.class, args);
-    }
+		importVerein();
 
-    @Override
-    public void run(String... args) throws Exception {
+		importRichterParcour.doImport();
+		importReiter.doImport();
 
-        // hier importieren wir manuell die Datei Richter.dat
+		importPferd();
 
-        new ImportRichterParcous(richterService, parcoursBauerService,
-                richterQualService, parcoursBauerQualService).importRichterAndParcourBauer();
+		/*
+		 * TURIERBEZEICHNUNG t1 = new TURIERBEZEICHNUNG(); t1.setName("Dressur");
+		 * t1.setKategorie(KATEGORIE.CDN_C);
+		 *
+		 * Bewerb b1 = new Bewerb(); b1.setName("Dressur A");
+		 * b1.setKlasse(BewerbKlasse.KLASSE_A); t1.addBewerb(b1);
+		 *
+		 * Bewerb b2 = new Bewerb(); b2.setName("Dressur L");
+		 * b2.setKlasse(BewerbKlasse.KLASSE_L); t1.addBewerb(b2);
+		 *
+		 * tournierService.add(t1);
+		 *
+		 * TURIERBEZEICHNUNG t2 = new TURIERBEZEICHNUNG(); t2.setName("Springen");
+		 * t2.setKategorie(KATEGORIE.CSN_B); tournierService.add(t2);
+		 *
+		 * for (TURIERBEZEICHNUNG t : tournierService.findAll()) {
+		 * System.out.println(t); }
+		 */
+	}
 
-        importVerein();
+	private void importPferd() {
+		try (BufferedReader reader = new BufferedReader(new FileReader("zns_daten/PFERDE01_TEST.dat"))) {
+			String line = reader.readLine();
+			while (line != null) {
+				String pferdKopfnummer = line.substring(0, 4);
+				String pferdPferdename = line.substring(4, 34).trim();
+				String pferdLebensnummer = line.substring(34, 43);
+				String pferdGeschlecht = line.substring(43, 44);
+				String pferdGebJahr = line.substring(44, 48);
+				String pferdFarbe = line.substring(48, 63).trim();
+				String pferdAbstammung = line.substring(63, 78).trim();
+				String pferdVereinNr = line.substring(78, 82);
+				String pferdLetzteZahlungJahr = line.substring(82, 86);
+				String pferdVerantwortlichePerson = line.substring(86, 161).trim();
+				String pferdVater = line.substring(161, 191).trim();
+				String pferdFeiPass = line.substring(191, 199).trim();
+				String pferdSatznummerDesPferdes = line.substring(199).trim();
 
-        importPferd();
+				addPferd(pferdKopfnummer, pferdPferdename, pferdLebensnummer, pferdGeschlecht, pferdGebJahr, pferdFarbe,
+						pferdAbstammung, pferdVereinNr, pferdLetzteZahlungJahr, pferdVerantwortlichePerson, pferdVater,
+						pferdFeiPass, pferdSatznummerDesPferdes);
+				line = reader.readLine();
+			}
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
+	}
 
-        new ImportReiter(reiterService).importReiter();
+	private void addPferd(String pferdKopfnummer, String pferdPferdename, String pferdLebensnummer,
+			String pferdGeschlecht, String pferdGebJahr, String pferdFarbe, String pferdAbstammung,
+			String pferdVereinNr, String pferdLetzteZahlungJahr, String pferdVerantwortlichePerson, String pferdVater,
+			String pferdFeiPass, String pferdSatznummerDesPferdes) {
 
-        /*
-         * TURIERBEZEICHNUNG t1 = new TURIERBEZEICHNUNG(); t1.setName("Dressur");
-         * t1.setKategorie(KATEGORIE.CDN_C);
-         *
-         * Bewerb b1 = new Bewerb(); b1.setName("Dressur A");
-         * b1.setKlasse(BewerbKlasse.KLASSE_A); t1.addBewerb(b1);
-         *
-         * Bewerb b2 = new Bewerb(); b2.setName("Dressur L");
-         * b2.setKlasse(BewerbKlasse.KLASSE_L); t1.addBewerb(b2);
-         *
-         * tournierService.add(t1);
-         *
-         * TURIERBEZEICHNUNG t2 = new TURIERBEZEICHNUNG(); t2.setName("Springen");
-         * t2.setKategorie(KATEGORIE.CSN_B); tournierService.add(t2);
-         *
-         * for (TURIERBEZEICHNUNG t : tournierService.findAll()) {
-         * System.out.println(t); }
-         */
-    }
+		Pferd byKopfnummer = pferdService.findByKopfnummer(pferdKopfnummer);
 
-    private void importPferd() {
-        try {
-            BufferedReader reader = new BufferedReader(
-                    new FileReader("zns_daten/PFERDE01_TEST.dat")); // , Charset.forName("Cp850")
-            String line = reader.readLine();
-            while (line != null) {
-                String pferdKopfnummer = line.substring(0, 4);
-                String pferdPferdename = line.substring(4, 34).trim();
-                String pferdLebensnummer = line.substring(34, 43);
-                String pferdGeschlecht = line.substring(43, 44);
-                String pferdGebJahr = line.substring(44, 48);
-                String pferdFarbe = line.substring(48, 63).trim();
-                String pferdAbstammung = line.substring(63, 78).trim();
-                String pferdVereinNr = line.substring(78, 82);
-                String pferdLetzteZahlungJahr = line.substring(82, 86);
-                String pferdVerantwortlichePerson = line.substring(86, 161).trim();
-                String pferdVater = line.substring(161, 191).trim();
-                String pferdFeiPass = line.substring(191, 199).trim();
-                String pferdSatznummerDesPferdes = line.substring(199).trim();
+		boolean insert = false;
+		if (byKopfnummer == null) {
+			insert = true;
+			byKopfnummer = new Pferd();
+			byKopfnummer.setKopfnummer(pferdKopfnummer);
+		}
 
-                addPferd(pferdKopfnummer, pferdPferdename, pferdLebensnummer, pferdGeschlecht,
-                        pferdGebJahr, pferdFarbe, pferdAbstammung, pferdVereinNr, pferdLetzteZahlungJahr, pferdVerantwortlichePerson,
-                        pferdVater, pferdFeiPass, pferdSatznummerDesPferdes);
-                line = reader.readLine();
-            }
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
-    }
+		Verein verein = vereinService.findByVereinId(pferdVereinNr);
+		
+		byKopfnummer.setPferdename(pferdPferdename);
+		byKopfnummer.setLebensnummer(pferdLebensnummer);
+		byKopfnummer.setGeschlecht(pferdGeschlecht);
+		byKopfnummer.setGebJahr(pferdGebJahr);
+		byKopfnummer.setFarbe(pferdFarbe);
+		byKopfnummer.setAbstammung(pferdAbstammung);
+		byKopfnummer.setVerein(verein);
+		byKopfnummer.setLetzteZahlungJahr(pferdLetzteZahlungJahr);
+		byKopfnummer.setVerantwortlichePerson(pferdVerantwortlichePerson);
+		byKopfnummer.setVater(pferdVater);
+		byKopfnummer.setFeiPass(pferdFeiPass);
+		byKopfnummer.setSatznummerDesPferdes(pferdSatznummerDesPferdes);
 
-    private void addPferd(String pferdKopfnummer, String pferdPferdename, String pferdLebensnummer, String pferdGeschlecht,
-                          String pferdGebJahr, String pferdFarbe, String pferdAbstammung, String pferdVereinNr, String pferdLetzteZahlungJahr, String pferdVerantwortlichePerson,
-                          String pferdVater, String pferdFeiPass, String pferdSatznummerDesPferdes) {
+		if (insert) {
+			pferdService.add(byKopfnummer);
+		} else {
+			pferdService.update(byKopfnummer);
+		}
+	}
 
-        Pferd byKopfnummer = pferdService.findByKopfnummer(pferdKopfnummer);
+	private void importVerein() {
+		try {
+			
+			addKeinVerein();
+			
+			BufferedReader reader = new BufferedReader(new FileReader("zns_daten/VEREIN01_TEST.dat")); // ,
+																										// Charset.forName("Cp850")
+			String line = reader.readLine();
+			while (line != null) {
+				String vereinNr = line.substring(0, 4);
+				String vereinName = line.substring(4).trim();
 
-        boolean insert = false;
-        if (byKopfnummer == null) {
-            insert = true;
-            byKopfnummer = new Pferd();
-            byKopfnummer.setKopfnummer(pferdKopfnummer);
-        }
+				addVerein(vereinNr, vereinName);
+				line = reader.readLine();
+			}
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
+	}
 
-        byKopfnummer.setPferdename(pferdPferdename);
-        byKopfnummer.setLebensnummer(pferdLebensnummer);
-        byKopfnummer.setGeschlecht(pferdGeschlecht);
-        byKopfnummer.setGebJahr(pferdGebJahr);
-        byKopfnummer.setFarbe(pferdFarbe);
-        byKopfnummer.setAbstammung(pferdAbstammung);
-        byKopfnummer.setVereinNr(pferdVereinNr);
-        byKopfnummer.setLetzteZahlungJahr(pferdLetzteZahlungJahr);
-        byKopfnummer.setVerantwortlichePerson(pferdVerantwortlichePerson);
-        byKopfnummer.setVater(pferdVater);
-        byKopfnummer.setFeiPass(pferdFeiPass);
-        byKopfnummer.setSatznummerDesPferdes(pferdSatznummerDesPferdes);
+	private void addKeinVerein() {
+		// import 0000 Verein -> vereinslos
+		Verein byVereinNr = vereinService.findByVereinId("0000");
 
-        if (insert) {
-            pferdService.add(byKopfnummer);
-        } else {
-            pferdService.update(byKopfnummer);
-        }
-    }
+		boolean insert = false;
+		if (byVereinNr == null) {
+			insert = true;
+			byVereinNr = new Verein();
+			byVereinNr.setVereinId("0000");
+		}
 
-    private void importVerein() {
-        try {
-            BufferedReader reader = new BufferedReader(
-                    new FileReader("zns_daten/VEREIN01_TEST.dat")); // , Charset.forName("Cp850")
-            String line = reader.readLine();
-            while (line != null) {
-                String vereinNr = line.substring(0, 4);
-                String vereinName = line.substring(4).trim();
+		byVereinNr.setVereinName("kein Verein");
 
-                addVerein(vereinNr, vereinName);
-                line = reader.readLine();
-            }
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
-    }
+		if (insert) {
+			vereinService.add(byVereinNr);
+		} else {
+			vereinService.update(byVereinNr);
+		}
+	}
 
-    private void addVerein(String vereinNr, String vereinName) {
+	private void addVerein(String vereinNr, String vereinName) {
 
-        Verein byVereinNr = vereinService.findByVereinId(vereinNr);
+		Verein byVereinNr = vereinService.findByVereinId(vereinNr);
 
-        boolean insert = false;
-        if (byVereinNr == null) {
-            insert = true;
-            byVereinNr = new Verein();
-            byVereinNr.setVereinId(vereinNr);
-        }
+		boolean insert = false;
+		if (byVereinNr == null) {
+			insert = true;
+			byVereinNr = new Verein();
+			byVereinNr.setVereinId(vereinNr);
+		}
 
-        byVereinNr.setVereinName(vereinName);
+		byVereinNr.setVereinName(vereinName);
 
-        if (insert) {
-            vereinService.add(byVereinNr);
-        } else {
-            vereinService.update(byVereinNr);
-        }
-    }
+		if (insert) {
+			vereinService.add(byVereinNr);
+		} else {
+			vereinService.update(byVereinNr);
+		}
+	}
 
 }

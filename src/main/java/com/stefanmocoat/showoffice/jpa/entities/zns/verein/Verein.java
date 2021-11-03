@@ -2,22 +2,16 @@ package com.stefanmocoat.showoffice.jpa.entities.zns.verein;
 
 import javax.persistence.*;
 
-@Entity
-public class Verein {
+import com.stefanmocoat.showoffice.jpa.entities.AbstractEntity;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+@Entity
+public class Verein extends AbstractEntity {
 
     @Column(length = 4)
     private String vereinId;
 
     @Column(length = 50)
     private String vereinName;
-
-    public long getId() {
-        return id;
-    }
 
     public String getVereinId() {
         return vereinId;
