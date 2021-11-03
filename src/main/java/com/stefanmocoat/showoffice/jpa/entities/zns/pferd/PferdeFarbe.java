@@ -9,7 +9,7 @@ import javax.persistence.Id;
  * Bei import aus ZNS (Richter01.DAT) entspricht dies dem X-Satz.
  */
 @Entity
-public class PferdFarben {
+public class PferdeFarbe {
 
     @Id
     @GeneratedValue
@@ -26,11 +26,11 @@ public class PferdFarben {
         this.id = id;
     }
 
-    public String getName() {
+    public String getFarbe() {
         return farbe;
     }
 
-    public void setName(String name) {
+    public void setFarbe(String name) {
         this.farbe = name;
     }
 

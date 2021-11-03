@@ -33,8 +33,9 @@ public class Pferd extends AbstractEntity {
 	@Column(length = 4)
 	private String gebJahr;
 
-	@Column(length = 15)
-	private String farbe;
+	@ManyToOne
+	@JsonIgnore	
+	private PferdeFarbe farbe;
 
 	@Column(length = 15)
 	private String abstammung;
@@ -109,11 +110,11 @@ public class Pferd extends AbstractEntity {
 		this.gebJahr = gebJahr;
 	}
 
-	public String getFarbe() {
+	public PferdeFarbe getFarbe() {
 		return farbe;
 	}
 
-	public void setFarbe(String farbe) {
+	public void setFarbe(PferdeFarbe farbe) {
 		this.farbe = farbe;
 	}
 

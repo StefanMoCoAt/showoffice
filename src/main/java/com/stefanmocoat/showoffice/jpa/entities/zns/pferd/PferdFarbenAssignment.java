@@ -22,7 +22,7 @@ public class PferdFarbenAssignment {
 	private PferdFarbenAssignment pferdFarbenAssignment;
 
 	@ManyToOne
-	private PferdFarben pferdFarben;
+	private PferdeFarbe pferdFarben;
 
 	public long getId() {
 		return id;
@@ -36,7 +36,7 @@ public class PferdFarbenAssignment {
 		return pferdFarbenAssignment;
 	}
 
-	public void setPferdFarben(PferdFarben pferdFarben) {
+	public void setPferdFarben(PferdeFarbe pferdFarben) {
 		this.pferdFarben = pferdFarben;
 	}
 
@@ -44,7 +44,7 @@ public class PferdFarbenAssignment {
 		return pferdFarbenAssignment;
 	}
 
-	public void setQualifikation(PferdFarben pferdFarben) {
+	public void setQualifikation(PferdeFarbe pferdFarben) {
 		this.pferdFarben = pferdFarben;
 	}
 

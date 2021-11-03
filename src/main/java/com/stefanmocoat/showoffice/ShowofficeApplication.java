@@ -12,8 +12,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.stefanmocoat.showoffice.jpa.entities.zns.pferd.Pferd;
+import com.stefanmocoat.showoffice.jpa.entities.zns.pferd.PferdeFarbe;
 import com.stefanmocoat.showoffice.jpa.entities.zns.verein.Verein;
 import com.stefanmocoat.showoffice.service.PferdService;
+import com.stefanmocoat.showoffice.service.PferdeFarbeService;
 import com.stefanmocoat.showoffice.service.ReiterService;
 import com.stefanmocoat.showoffice.service.VereinService;
 import com.stefanmocoat.showoffice.service.imports.ImportReiter;
@@ -39,6 +41,9 @@ public class ShowofficeApplication implements CommandLineRunner {
 
 	@Autowired
 	PferdService pferdService;
+
+	@Autowired
+	PferdeFarbeService pferdeFarbeService;
 
 	@Autowired
 	ReiterService reiterService;
@@ -105,6 +110,18 @@ public class ShowofficeApplication implements CommandLineRunner {
 		}
 	}
 
+	private PferdeFarbe addPferdFarbeIfNotExists(String farbe) {
+		String trimmedQual = farbe.trim();
+		PferdeFarbe pferdeFarbe = pferdeFarbeService.findByFarbe(farbe);
+		if (pferdeFarbe == null) {
+			pferdeFarbe = new PferdeFarbe();
+			pferdeFarbe.setFarbe(trimmedQual);
+			pferdeFarbeService.add(pferdeFarbe);
+		}
+		
+		return pferdeFarbeService.findByFarbe(farbe);
+	}
+
 	private void addPferd(String pferdKopfnummer, String pferdPferdename, String pferdLebensnummer,
 			String pferdGeschlecht, String pferdGebJahr, String pferdFarbe, String pferdAbstammung,
 			String pferdVereinNr, String pferdLetzteZahlungJahr, String pferdVerantwortlichePerson, String pferdVater,
@@ -119,13 +136,14 @@ public class ShowofficeApplication implements CommandLineRunner {
 			byKopfnummer.setKopfnummer(pferdKopfnummer);
 		}
 
+		PferdeFarbe farbe = addPferdFarbeIfNotExists(pferdFarbe);
 		Verein verein = vereinService.findByVereinId(pferdVereinNr);
-		
+
 		byKopfnummer.setPferdename(pferdPferdename);
 		byKopfnummer.setLebensnummer(pferdLebensnummer);
 		byKopfnummer.setGeschlecht(pferdGeschlecht);
 		byKopfnummer.setGebJahr(pferdGebJahr);
-		byKopfnummer.setFarbe(pferdFarbe);
+		byKopfnummer.setFarbe(farbe);
 		byKopfnummer.setAbstammung(pferdAbstammung);
 		byKopfnummer.setVerein(verein);
 		byKopfnummer.setLetzteZahlungJahr(pferdLetzteZahlungJahr);
@@ -143,9 +161,9 @@ public class ShowofficeApplication implements CommandLineRunner {
 
 	private void importVerein() {
 		try {
-			
+
 			addKeinVerein();
-			
+
 			BufferedReader reader = new BufferedReader(new FileReader("zns_daten/VEREIN01_TEST.dat")); // ,
 																										// Charset.forName("Cp850")
 			String line = reader.readLine();
