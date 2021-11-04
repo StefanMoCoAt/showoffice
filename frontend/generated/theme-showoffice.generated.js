@@ -71,7 +71,7 @@ const getStyleModule = (id) => {
       .join(" ");
   return cssText;
 };
-import stylesCss from 'themes/myapp/styles.css';
+import stylesCss from 'themes/showoffice/styles.css';
 import '@vaadin/vaadin-lumo-styles/typography.js';
 import '@vaadin/vaadin-lumo-styles/color.js';
 import '@vaadin/vaadin-lumo-styles/spacing.js';
@@ -118,9 +118,9 @@ export const applyTheme = (target) => {
   injectGlobalCss(stylesCss.toString(), target);
     
   
-  if (!document['_vaadintheme_myapp_componentCss']) {
+  if (!document['_vaadintheme_showoffice_componentCss']) {
     
-    document['_vaadintheme_myapp_componentCss'] = true;
+    document['_vaadintheme_showoffice_componentCss'] = true;
   }
   // Lumo styles are injected into shadow roots.
 // For the document, we need to be compatible with flow-generated-imports and add missing <style> tags.

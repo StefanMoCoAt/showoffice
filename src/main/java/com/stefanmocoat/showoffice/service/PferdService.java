@@ -1,44 +1,48 @@
 package com.stefanmocoat.showoffice.service;
 
-import com.stefanmocoat.showoffice.jpa.entities.Pferd;
-import com.stefanmocoat.showoffice.jpa.repository.PferdRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 
-@Component
-public class PferdService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
+import org.vaadin.artur.helpers.CrudService;
 
-    @Autowired
-    PferdRepository pferdRepository;
+import com.stefanmocoat.showoffice.jpa.entities.Pferd;
+import com.stefanmocoat.showoffice.jpa.repository.PferdRepository;
 
-    public List<Pferd> findAll() {
-        return pferdRepository.findAll();
-    }
+@Service
+public class PferdService extends CrudService<Pferd, Integer> {
 
-    public Pferd finOne(long id) {
-        return pferdRepository.findById(id).orElse(null);
-    }
+	@Autowired
+	PferdRepository pferdRepository;
 
-    public Pferd findByKopfnummer(String kopfnummer) {
-        return pferdRepository.findByKopfnummer(kopfnummer);
-    }
+	public List<Pferd> findAll() {
+		return pferdRepository.findAll();
+	}
 
-    public Pferd findByPferdename(String pferdename) {
-        return pferdRepository.findByPferdename(pferdename);
-    }
+	public Pferd finOne(int id) {
+		return pferdRepository.findById(id).orElse(null);
+	}
 
-    public Pferd add(Pferd pferd) {
-        return pferdRepository.save(pferd);
-    }
+	public Pferd findByKopfnummer(String kopfnummer) {
+		return pferdRepository.findByKopfnummer(kopfnummer);
+	}
 
-    public void update(Pferd pferd) {
-        pferdRepository.save(pferd);
-    }
+	public Pferd findByPferdename(String pferdename) {
+		return pferdRepository.findByPferdename(pferdename);
+	}
 
-    public void delete(Pferd pferd) {
-        pferdRepository.delete(pferd);
-    }
+	public Pferd add(Pferd pferd) {
+		return pferdRepository.save(pferd);
+	}
+
+	public void delete(Pferd pferd) {
+		pferdRepository.delete(pferd);
+	}
+
+	@Override
+	protected JpaRepository<Pferd, Integer> getRepository() {
+		return pferdRepository;
+	}
 
 }
