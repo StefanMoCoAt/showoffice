@@ -1,10 +1,11 @@
 package com.stefanmocoat.showoffice.jpa.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Import PFERD01.DAT
@@ -26,7 +27,7 @@ public class Pferd extends AbstractEntity {
 	private String lebensnummer;
 
 	@Column(length = 1)
-	private String geschlecht;
+	private PferdeGeschlecht geschlecht;
 
 	@Column(length = 4)
 	private String gebJahr;
@@ -92,11 +93,11 @@ public class Pferd extends AbstractEntity {
 		this.lebensnummer = lebensnummer;
 	}
 
-	public String getGeschlecht() {
+	public PferdeGeschlecht getGeschlecht() {
 		return geschlecht;
 	}
 
-	public void setGeschlecht(String geschlecht) {
+	public void setGeschlecht(PferdeGeschlecht geschlecht) {
 		this.geschlecht = geschlecht;
 	}
 

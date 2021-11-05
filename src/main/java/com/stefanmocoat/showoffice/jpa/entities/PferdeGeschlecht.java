@@ -6,13 +6,22 @@ public enum PferdeGeschlecht {
     STUTE("S"),
     WALLACH("W");
 
-    String geschlecht;
+    String code;
 
     PferdeGeschlecht(String geschlecht) {
-        this.geschlecht = geschlecht;
+        this.code = geschlecht;
     }
 
-    public String getGeschlecht() {
-        return geschlecht;
+    public String getCode() {
+        return code;
+    }
+
+    public static PferdeGeschlecht findByCode(String code) {
+        for (PferdeGeschlecht g : PferdeGeschlecht.values()) {
+            if (g.getCode().equals(code.trim())) {
+                return g;
+            }
+        }
+        return null;
     }
 }

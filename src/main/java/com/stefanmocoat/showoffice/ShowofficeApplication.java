@@ -5,20 +5,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Set;
 
+import com.stefanmocoat.showoffice.jpa.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.stefanmocoat.showoffice.jpa.entities.Bewerb;
-import com.stefanmocoat.showoffice.jpa.entities.Kategorie;
-import com.stefanmocoat.showoffice.jpa.entities.Paarung;
-import com.stefanmocoat.showoffice.jpa.entities.Pferd;
-import com.stefanmocoat.showoffice.jpa.entities.PferdeFarbe;
-import com.stefanmocoat.showoffice.jpa.entities.Reiter;
-import com.stefanmocoat.showoffice.jpa.entities.Turnier;
-import com.stefanmocoat.showoffice.jpa.entities.Verein;
 import com.stefanmocoat.showoffice.service.PferdService;
 import com.stefanmocoat.showoffice.service.PferdeFarbeService;
 import com.stefanmocoat.showoffice.service.ReiterService;
@@ -97,26 +91,32 @@ public class ShowofficeApplication implements CommandLineRunner {
 	}
 
 	private void importPferd() {
+
+		PferdeGeschlecht pferdeGeschlecht;
+
 		try (BufferedReader reader = new BufferedReader(new FileReader("zns_daten/PFERDE01_TEST.dat"))) {
 			String line = reader.readLine();
 			while (line != null) {
-				String pferdKopfnummer = line.substring(0, 4);
-				String pferdPferdename = line.substring(4, 34).trim();
-				String pferdLebensnummer = line.substring(34, 43);
-				String pferdGeschlecht = line.substring(43, 44);
-				String pferdGebJahr = line.substring(44, 48);
-				String pferdFarbe = line.substring(48, 63).trim();
-				String pferdAbstammung = line.substring(63, 78).trim();
-				String pferdVereinNr = line.substring(78, 82);
-				String pferdLetzteZahlungJahr = line.substring(82, 86);
-				String pferdVerantwortlichePerson = line.substring(86, 161).trim();
-				String pferdVater = line.substring(161, 191).trim();
-				String pferdFeiPass = line.substring(191, 199).trim();
-				String pferdSatznummerDesPferdes = line.substring(199).trim();
+				String kopfNr = line.substring(0, 4);
+				String name = line.substring(4, 34).trim();
+				String lebensNr = line.substring(34, 43);
 
-				addPferd(pferdKopfnummer, pferdPferdename, pferdLebensnummer, pferdGeschlecht, pferdGebJahr, pferdFarbe,
-						pferdAbstammung, pferdVereinNr, pferdLetzteZahlungJahr, pferdVerantwortlichePerson, pferdVater,
-						pferdFeiPass, pferdSatznummerDesPferdes);
+				String inGeschlecht = line.substring(43, 44);
+				PferdeGeschlecht geschlecht = PferdeGeschlecht.findByCode(inGeschlecht);
+
+				String gebJahr = line.substring(44, 48);
+				String farbe = line.substring(48, 63).trim();
+				String abstammung = line.substring(63, 78).trim();
+				String vereinNr = line.substring(78, 82);
+				String letzteZahlungJahr = line.substring(82, 86);
+				String verantwortlichePerson = line.substring(86, 161).trim();
+				String vater = line.substring(161, 191).trim();
+				String feiPass = line.substring(191, 199).trim();
+				String satzNr = line.substring(199).trim();
+
+				addPferd(kopfNr, name, lebensNr, geschlecht, gebJahr, farbe,
+						abstammung, vereinNr, letzteZahlungJahr, verantwortlichePerson, vater,
+						feiPass, satzNr);
 				line = reader.readLine();
 			}
 		} catch (IOException e) {
@@ -136,40 +136,42 @@ public class ShowofficeApplication implements CommandLineRunner {
 		return pferdeFarbeService.findByFarbe(farbe);
 	}
 
-	private void addPferd(String pferdKopfnummer, String pferdPferdename, String pferdLebensnummer,
-			String pferdGeschlecht, String pferdGebJahr, String pferdFarbe, String pferdAbstammung,
-			String pferdVereinNr, String pferdLetzteZahlungJahr, String pferdVerantwortlichePerson, String pferdVater,
-			String pferdFeiPass, String pferdSatznummerDesPferdes) {
+	private void addPferd(String kopfNr, String name, String lebensNr,
+						  PferdeGeschlecht geschlecht, String gebJahr, String farbe, String abstammung,
+						  String vereinNr, String letzteZahlungJahr, String verantwortlichePerson, String vater,
+						  String feiPass, String satzNr) {
 
-		Pferd byKopfnummer = pferdService.findByKopfnummer(pferdKopfnummer);
+		Pferd pferd = pferdService.findByKopfnummer(kopfNr);
 
 		boolean insert = false;
-		if (byKopfnummer == null) {
+		if (pferd == null) {
 			insert = true;
-			byKopfnummer = new Pferd();
-			byKopfnummer.setKopfnummer(pferdKopfnummer);
+			pferd = new Pferd();
+			pferd.setKopfnummer(kopfNr);
 		}
 
-		PferdeFarbe farbe = addPferdFarbeIfNotExists(pferdFarbe);
-		Verein verein = vereinService.findByVereinId(pferdVereinNr);
+		PferdeFarbe pfarbe = addPferdFarbeIfNotExists(farbe);
+		Verein verein = vereinService.findByVereinId(vereinNr);
 
-		byKopfnummer.setPferdename(pferdPferdename);
-		byKopfnummer.setLebensnummer(pferdLebensnummer);
-		byKopfnummer.setGeschlecht(pferdGeschlecht);
-		byKopfnummer.setGebJahr(pferdGebJahr);
-		byKopfnummer.setFarbe(farbe);
-		byKopfnummer.setAbstammung(pferdAbstammung);
-		byKopfnummer.setVerein(verein);
-		byKopfnummer.setLetzteZahlungJahr(pferdLetzteZahlungJahr);
-		byKopfnummer.setVerantwortlichePerson(pferdVerantwortlichePerson);
-		byKopfnummer.setVater(pferdVater);
-		byKopfnummer.setFeiPass(pferdFeiPass);
-		byKopfnummer.setSatznummerDesPferdes(pferdSatznummerDesPferdes);
+		pferd.setPferdename(name);
+		pferd.setLebensnummer(lebensNr);
+
+		pferd.setGeschlecht(geschlecht);
+
+		pferd.setGebJahr(gebJahr);
+		pferd.setFarbe(pfarbe);
+		pferd.setAbstammung(abstammung);
+		pferd.setVerein(verein);
+		pferd.setLetzteZahlungJahr(letzteZahlungJahr);
+		pferd.setVerantwortlichePerson(verantwortlichePerson);
+		pferd.setVater(vater);
+		pferd.setFeiPass(feiPass);
+		pferd.setSatznummerDesPferdes(satzNr);
 
 		if (insert) {
-			pferdService.add(byKopfnummer);
+			pferdService.add(pferd);
 		} else {
-			pferdService.update(byKopfnummer);
+			pferdService.update(pferd);
 		}
 	}
 
@@ -195,41 +197,41 @@ public class ShowofficeApplication implements CommandLineRunner {
 
 	private void addKeinVerein() {
 		// import 0000 Verein -> vereinslos
-		Verein byVereinNr = vereinService.findByVereinId("0000");
+		Verein verein = vereinService.findByVereinId("0000");
 
 		boolean insert = false;
-		if (byVereinNr == null) {
+		if (verein == null) {
 			insert = true;
-			byVereinNr = new Verein();
-			byVereinNr.setVereinId("0000");
+			verein = new Verein();
+			verein.setVereinId("0000");
 		}
 
-		byVereinNr.setVereinName("kein Verein");
+		verein.setVereinName("kein Verein");
 
 		if (insert) {
-			vereinService.add(byVereinNr);
+			vereinService.add(verein);
 		} else {
-			vereinService.update(byVereinNr);
+			vereinService.update(verein);
 		}
 	}
 
 	private void addVerein(String vereinNr, String vereinName) {
 
-		Verein byVereinNr = vereinService.findByVereinId(vereinNr);
+		Verein verein = vereinService.findByVereinId(vereinNr);
 
 		boolean insert = false;
-		if (byVereinNr == null) {
+		if (verein == null) {
 			insert = true;
-			byVereinNr = new Verein();
-			byVereinNr.setVereinId(vereinNr);
+			verein = new Verein();
+			verein.setVereinId(vereinNr);
 		}
 
-		byVereinNr.setVereinName(vereinName);
+		verein.setVereinName(vereinName);
 
 		if (insert) {
-			vereinService.add(byVereinNr);
+			vereinService.add(verein);
 		} else {
-			vereinService.update(byVereinNr);
+			vereinService.update(verein);
 		}
 	}
 

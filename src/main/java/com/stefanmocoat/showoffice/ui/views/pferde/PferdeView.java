@@ -46,7 +46,7 @@ public class PferdeView extends Div implements BeforeEnterObserver {
 	private TextField kopfnummer;
 	private TextField pferdename;
 	private TextField lebensnummer;
-	private TextField geschlecht;
+	//private TextField geschlecht;
 	private TextField gebJahr;
 	private TextField occupation;
 
@@ -75,7 +75,7 @@ public class PferdeView extends Div implements BeforeEnterObserver {
 		grid.addColumn("kopfnummer").setAutoWidth(true);
 		grid.addColumn("pferdename").setAutoWidth(true);
 		grid.addColumn("lebensnummer").setAutoWidth(true);
-		grid.addColumn("geschlecht").setAutoWidth(true);
+		//grid.addColumn("geschlecht").setAutoWidth(true);
 		grid.addColumn("gebJahr").setAutoWidth(true);
 		grid.addColumn("farbe").setAutoWidth(true);
 //        TemplateRenderer<Pferd> importantRenderer = TemplateRenderer.<Pferd>of(
@@ -160,10 +160,10 @@ public class PferdeView extends Div implements BeforeEnterObserver {
 		kopfnummer = new TextField("kopfnummer");
 		pferdename = new TextField("pferdename");
 		lebensnummer = new TextField("lebensnummer");
-		geschlecht = new TextField("geschlecht");
+		//geschlecht = new TextField("geschlecht");
 		gebJahr = new TextField("gebJahr");
 		occupation = new TextField("Occupation");
-		Component[] fields = new Component[] { kopfnummer, pferdename, lebensnummer, geschlecht, gebJahr, occupation };
+		Component[] fields = new Component[] { kopfnummer, pferdename, lebensnummer,  gebJahr, occupation };
 
 		for (Component field : fields) {
 			((HasStyle) field).addClassName("full-width");
