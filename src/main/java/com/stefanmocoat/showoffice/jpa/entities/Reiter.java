@@ -19,17 +19,19 @@ public class Reiter extends AbstractEntity {
     @Column
     private String vorname;
 
-    @Column
+    @Column(length = 2)
     private String budesland;
 
-    @Column
+    @Column(length = 50)
     private String vereinsname;
 
-    @Column
+
+    @Column(length = 3)
     private String nationalitaet;
 
-    @Column
-    private String lizenz;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 4)
+    private Lizenz lizenz;
 
     @Column
     private String startkarte;
@@ -130,11 +132,11 @@ public class Reiter extends AbstractEntity {
         this.nationalitaet = nationalitaet;
     }
 
-    public String getLizenz() {
+    public Lizenz getLizenz() {
         return lizenz;
     }
 
-    public void setLizenz(String reiterlizenz) {
+    public void setLizenz(Lizenz reiterlizenz) {
         this.lizenz = reiterlizenz;
     }
 

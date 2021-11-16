@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import com.stefanmocoat.showoffice.jpa.entities.Lizenz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,32 +35,34 @@ public class ImportReiter implements IImport {
 					line = reader.readLine();
 					continue;
 				}
-				String reiterSatzNrReiter = line.substring(0, 6); // 6
-				String reiterFamilienname = line.substring(6, 56).trim(); // 50
-				String reiterVorname = line.substring(56, 81).trim(); // 25
-				String reiterBudesland = line.substring(81, 83); // 2
-				String reiterVereinsname = line.substring(83, 133).trim(); // 50
-				String reiterNationalitaet = line.substring(133, 136); // 3
-				String reiterlizenz = line.substring(136, 140).trim(); // 4
-				String reiterStartkarte = line.substring(140, 141).trim(); // 1
-				String reiterFahrlizenz = line.substring(141, 143).trim(); // 2
-				String reiterAltersKlJgJrU25 = line.substring(143, 145).trim(); // 2
-				String reiterAltersKlY = line.substring(145, 146).trim(); // 1
-				String reiterMitgliedsnummer = line.substring(146, 154); // 8
-				String reiterTelefonnummer = line.substring(154, 175).trim(); // 21
-				String reiterKader = line.substring(175, 176).trim(); // 1
-				String reiterLetzteZahlungJahr = line.substring(176, 180); // 4
-				String reiterGeschlecht = line.substring(180, 181); // 1
-				String reiterGeburtsdatum = line.substring(181, 189); // 8
-				String reiterFeiId = line.substring(189, 199); // 10
-				String reiterSperrliste = line.substring(199, 200); // 1
-				String reiterLizenzinfo = line.substring(200).trim(); // 10
+				String satzNrReiter = line.substring(0, 6); // 6
+				String familienname = line.substring(6, 56).trim(); // 50
+				String vorname = line.substring(56, 81).trim(); // 25
+				String budesland = line.substring(81, 83); // 2
+				String vereinsname = line.substring(83, 133).trim(); // 50
+				String nationalitaet = line.substring(133, 136); // 3
 
-				addReiter(reiterSatzNrReiter, reiterFamilienname, reiterVorname, reiterBudesland, reiterVereinsname,
-						reiterNationalitaet, reiterlizenz, reiterStartkarte, reiterFahrlizenz, reiterAltersKlJgJrU25,
-						reiterAltersKlY, reiterMitgliedsnummer, reiterTelefonnummer, reiterKader,
-						reiterLetzteZahlungJahr, reiterGeschlecht, reiterGeburtsdatum, reiterFeiId, reiterSperrliste,
-						reiterLizenzinfo);
+				String lizenz = line.substring(136, 140).trim(); // 4
+
+				String startkarte = line.substring(140, 141).trim(); // 1
+				String fahrlizenz = line.substring(141, 143).trim(); // 2
+				String altersKlJgJrU25 = line.substring(143, 145).trim(); // 2
+				String altersKlY = line.substring(145, 146).trim(); // 1
+				String mitgliedsNr = line.substring(146, 154); // 8
+				String telNr = line.substring(154, 175).trim(); // 21
+				String kader = line.substring(175, 176).trim(); // 1
+				String letzteZahlungJahr = line.substring(176, 180); // 4
+				String geschlecht = line.substring(180, 181); // 1
+				String gebDatum = line.substring(181, 189); // 8
+				String feiId = line.substring(189, 199); // 10
+				String sperrliste = line.substring(199, 200); // 1
+				String lizenzinfo = line.substring(200).trim(); // 10
+
+				addReiter(satzNrReiter, familienname, vorname, budesland, vereinsname,
+						nationalitaet, lizenz, startkarte, fahrlizenz, altersKlJgJrU25,
+						altersKlY, mitgliedsNr, telNr, kader,
+						letzteZahlungJahr, geschlecht, gebDatum, feiId, sperrliste,
+						lizenzinfo);
 				line = reader.readLine();
 			}
 		} catch (IOException e) {
@@ -67,44 +70,46 @@ public class ImportReiter implements IImport {
 		}
 	}
 
-	private void addReiter(String reiterSatzNrReiter, String reiterFamilienname, String reiterVorname,
-			String reiterBudesland, String reiterVereinsname, String reiterNationalitaet, String reiterlizenz,
-			String reiterStartkarte, String reiterFahrlizenz, String reiterAltersKlJgJrU25, String reiterAltersKlY,
-			String reiterMitgliedsnummer, String reiterTelefonnummer, String reiterKader,
-			String reiterLetzteZahlungJahr, String reiterGeschlecht, String reiterGeburtsdatum, String reiterFeiId,
-			String reiterSperrliste, String reiterLizenzinfo) {
+	private void addReiter(String satzNrReiter, String familienname, String vorname,
+			String budesland, String vereinsname, String nationalitaet, String lizenz,
+			String startkarte, String fahrlizenz, String altersKlJgJrU25, String altersKlY,
+			String mitgliedsNr, String telNr, String kader,
+			String letzteZahlungJahr, String geschlecht, String gebDatum, String feiId,
+			String sperrliste, String lizenzinfo) {
 
-		Reiter reiter = reiterService.findBySatzNrReiter(reiterSatzNrReiter);
+		Reiter reiter = reiterService.findBySatzNrReiter(satzNrReiter);
 
 		boolean insert = false;
 		if (reiter == null) {
 			insert = true;
 			reiter = new Reiter();
-			reiter.setSatzNrReiter(reiterSatzNrReiter);
+			reiter.setSatzNrReiter(satzNrReiter);
 		}
 
-		Verein verein = vereinService.findByVereinId(reiterMitgliedsnummer.substring(0, 4));
+		Verein verein = vereinService.findByVereinId(mitgliedsNr.substring(0, 4));
 
-		reiter.setFamilienname(reiterFamilienname);
-		reiter.setVorname(reiterVorname);
-		reiter.setBudesland(reiterBudesland);
-		reiter.setVereinsname(reiterVereinsname);
-		reiter.setNationalitaet(reiterNationalitaet);
-		reiter.setLizenz(reiterlizenz);
-		reiter.setStartkarte(reiterStartkarte);
-		reiter.setFahrlizenz(reiterFahrlizenz);
-		reiter.setAltersKlJgJrU25(reiterAltersKlJgJrU25);
-		reiter.setAltersKlY(reiterAltersKlY);
-		reiter.setMitgliedsnummer(reiterMitgliedsnummer);
+		reiter.setFamilienname(familienname);
+		reiter.setVorname(vorname);
+		reiter.setBudesland(budesland);
+		reiter.setVereinsname(vereinsname);
+		reiter.setNationalitaet(nationalitaet);
+
+		reiter.setLizenz(Lizenz.findByCode(lizenz));
+
+		reiter.setStartkarte(startkarte);
+		reiter.setFahrlizenz(fahrlizenz);
+		reiter.setAltersKlJgJrU25(altersKlJgJrU25);
+		reiter.setAltersKlY(altersKlY);
+		reiter.setMitgliedsnummer(mitgliedsNr);
 		reiter.setVerein(verein);
-		reiter.setTelefonnummer(reiterTelefonnummer);
-		reiter.setKader(reiterKader);
-		reiter.setLetzteZahlungJahr(reiterLetzteZahlungJahr);
-		reiter.setGeschlecht(reiterGeschlecht);
-		reiter.setGeburtsdatum(reiterGeburtsdatum);
-		reiter.setFeiId(reiterFeiId);
-		reiter.setSperrliste(reiterSperrliste);
-		reiter.setLizenzinfo(reiterLizenzinfo);
+		reiter.setTelefonnummer(telNr);
+		reiter.setKader(kader);
+		reiter.setLetzteZahlungJahr(letzteZahlungJahr);
+		reiter.setGeschlecht(geschlecht);
+		reiter.setGeburtsdatum(gebDatum);
+		reiter.setFeiId(feiId);
+		reiter.setSperrliste(sperrliste);
+		reiter.setLizenzinfo(lizenzinfo);
 		if (insert) {
 			reiterService.add(reiter);
 		} else {

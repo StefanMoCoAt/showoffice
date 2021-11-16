@@ -4,8 +4,13 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Year;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * Import PFERD01.DAT
@@ -30,7 +35,8 @@ public class Pferd extends AbstractEntity {
 	private PferdeGeschlecht geschlecht;
 
 	@Column(length = 4)
-	private String gebJahr;
+	private Year gebJahr;
+	//private String gebJahr;
 
 	@ManyToOne
 	@JsonIgnore	
@@ -101,11 +107,11 @@ public class Pferd extends AbstractEntity {
 		this.geschlecht = geschlecht;
 	}
 
-	public String getGebJahr() {
+	public Year getGebJahr() {
 		return gebJahr;
 	}
 
-	public void setGebJahr(String gebJahr) {
+	public void setGebJahr(Year gebJahr) {
 		this.gebJahr = gebJahr;
 	}
 

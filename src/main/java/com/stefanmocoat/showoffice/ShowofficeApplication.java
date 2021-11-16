@@ -5,7 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Set;
+import java.time.Year;
+import java.util.Date;
 
 import com.stefanmocoat.showoffice.jpa.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,7 +105,7 @@ public class ShowofficeApplication implements CommandLineRunner {
 				String inGeschlecht = line.substring(43, 44);
 				PferdeGeschlecht geschlecht = PferdeGeschlecht.findByCode(inGeschlecht);
 
-				String gebJahr = line.substring(44, 48);
+				Year gebJahr = Year.of(Integer.parseInt(line.substring(44, 48)));
 				String farbe = line.substring(48, 63).trim();
 				String abstammung = line.substring(63, 78).trim();
 				String vereinNr = line.substring(78, 82);
@@ -137,7 +138,7 @@ public class ShowofficeApplication implements CommandLineRunner {
 	}
 
 	private void addPferd(String kopfNr, String name, String lebensNr,
-						  PferdeGeschlecht geschlecht, String gebJahr, String farbe, String abstammung,
+						  PferdeGeschlecht geschlecht, Year gebJahr, String farbe, String abstammung,
 						  String vereinNr, String letzteZahlungJahr, String verantwortlichePerson, String vater,
 						  String feiPass, String satzNr) {
 
