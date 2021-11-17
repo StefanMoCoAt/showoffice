@@ -9,6 +9,7 @@ import java.time.Year;
 import java.util.Date;
 
 import com.stefanmocoat.showoffice.jpa.entities.*;
+import com.stefanmocoat.showoffice.service.imports.ImportPferde;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -41,16 +42,16 @@ public class ShowofficeApplication implements CommandLineRunner {
 	ImportReiter importReiter;
 
 	@Autowired
+	ImportPferde importPferde;
+
+	@Autowired
 	VereinService vereinService;
 
 	@Autowired
-	PferdService pferdService;
-
-	@Autowired
-	PferdeFarbeService pferdeFarbeService;
-
-	@Autowired
 	ReiterService reiterService;
+
+	@Autowired
+	PferdService pferdService;
 
 	@Autowired
 	TurnierService turnierService;
@@ -66,8 +67,7 @@ public class ShowofficeApplication implements CommandLineRunner {
 
 		importRichterParcour.doImport();
 		importReiter.doImport();
-
-		importPferd();
+		importPferde.doImport();
 		
 		importTurnier();
 
@@ -91,7 +91,7 @@ public class ShowofficeApplication implements CommandLineRunner {
 		 */
 	}
 
-	private void importPferd() {
+	/*private void importPferd() {
 
 		PferdeGeschlecht pferdeGeschlecht;
 
@@ -175,7 +175,7 @@ public class ShowofficeApplication implements CommandLineRunner {
 			pferdService.update(pferd);
 		}
 	}
-
+*/
 	private void importVerein() {
 		try {
 

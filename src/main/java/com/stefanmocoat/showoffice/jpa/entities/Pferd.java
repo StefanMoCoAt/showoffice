@@ -42,15 +42,16 @@ public class Pferd extends AbstractEntity {
 	@JsonIgnore	
 	private PferdeFarbe farbe;
 
-	@Column(length = 15)
-	private String abstammung;
+	@ManyToOne
+	@JsonIgnore
+	private PferdAbstammung abstammung;
 
 	@ManyToOne
 	@JsonIgnore
 	private Verein verein;
 
 	@Column(length = 4)
-	private String letzteZahlungJahr;
+	private Year letzteZahlungJahr;
 
 	// Standard BLANK
 	@Column(length = 75)
@@ -123,19 +124,19 @@ public class Pferd extends AbstractEntity {
 		this.farbe = farbe;
 	}
 
-	public String getAbstammung() {
+	public PferdAbstammung getAbstammung() {
 		return abstammung;
 	}
 
-	public void setAbstammung(String abstammung) {
+	public void setAbstammung(PferdAbstammung abstammung) {
 		this.abstammung = abstammung;
 	}
 
-	public String getLetzteZahlungJahr() {
+	public Year getLetzteZahlungJahr() {
 		return letzteZahlungJahr;
 	}
 
-	public void setLetzteZahlungJahr(String letzteZahlungJahr) {
+	public void setLetzteZahlungJahr(Year letzteZahlungJahr) {
 		this.letzteZahlungJahr = letzteZahlungJahr;
 	}
 
