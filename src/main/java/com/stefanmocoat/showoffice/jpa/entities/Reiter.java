@@ -3,6 +3,10 @@ package com.stefanmocoat.showoffice.jpa.entities;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 /**
  * Import LIZENZ01.DAT
@@ -37,14 +41,17 @@ public class Reiter extends AbstractEntity {
     @Column
     private String startkarte;
 
+    @Enumerated(EnumType.STRING)
     @Column
-    private String fahrlizenz;
+    private Lizenz fahrlizenz;
 
+    @Enumerated(EnumType.STRING)
     @Column
-    private String altersKlJgJrU25; // "JG"=Jugendlich "JR"=Junior "25"=U25
+    private AltersKlasse altersKlJgJrU25; // "JG"=Jugendlich "JR"=Junior "25"=U25
 
+    @Enumerated(EnumType.STRING)
     @Column
-    private String altersKlY; // "Y"=JungerReiter
+    private AltersKlasse altersKlY; // "Y"=JungerReiter
 
     @Column
     private String mitgliedsnummer;
@@ -62,11 +69,13 @@ public class Reiter extends AbstractEntity {
     @Column
     private String letzteZahlungJahr;
 
+    @Enumerated(EnumType.STRING)
     @Column
-    private String geschlecht; // "W" "M"
+    private ReiterGeschlecht geschlecht; // "W" "M"
 
+    @DateTimeFormat
     @Column
-    private String geburtsdatum; // "yyyyMMdd"
+    private Date geburtsdatum; // "yyyyMMdd"
 
     @Column
     private String feiId;
@@ -149,28 +158,28 @@ public class Reiter extends AbstractEntity {
         this.startkarte = startkarte;
     }
 
-    public String getFahrlizenz() {
+    public Lizenz getFahrlizenz() {
         return fahrlizenz;
     }
 
-    public void setFahrlizenz(String fahrlizenz) {
+    public void setFahrlizenz(Lizenz fahrlizenz) {
         this.fahrlizenz = fahrlizenz;
     }
 
-    public String getAltersKlJgJrU25() {
+    public AltersKlasse getAltersKlJgJrU25() {
         return altersKlJgJrU25;
     }
 
-    public void setAltersKlJgJrU25(String altersklasseJugendJuniorU25) {
-        this.altersKlJgJrU25 = altersklasseJugendJuniorU25;
+    public void setAltersKlJgJrU25(AltersKlasse altersKlJgJrU25) {
+        this.altersKlJgJrU25 = altersKlJgJrU25;
     }
 
-    public String getAltersKlY() {
+    public AltersKlasse getAltersKlY() {
         return altersKlY;
     }
 
-    public void setAltersKlY(String altersklasseJungeReiter) {
-        this.altersKlY = altersklasseJungeReiter;
+    public void setAltersKlY(AltersKlasse altersKlY) {
+        this.altersKlY = altersKlY;
     }
 
     public String getMitgliedsnummer() {
@@ -213,19 +222,19 @@ public class Reiter extends AbstractEntity {
         this.letzteZahlungJahr = letzteZahlungJahr;
     }
 
-    public String getGeschlecht() {
+    public ReiterGeschlecht getGeschlecht() {
         return geschlecht;
     }
 
-    public void setGeschlecht(String geschlecht) {
+    public void setGeschlecht(ReiterGeschlecht geschlecht) {
         this.geschlecht = geschlecht;
     }
 
-    public String getGeburtsdatum() {
+    public Date getGeburtsdatum() {
         return geburtsdatum;
     }
 
-    public void setGeburtsdatum(String geburtsdatum) {
+    public void setGeburtsdatum(Date geburtsdatum) {
         this.geburtsdatum = geburtsdatum;
     }
 
@@ -252,6 +261,5 @@ public class Reiter extends AbstractEntity {
     public void setLizenzinfo(String lizenzinfo) {
         this.lizenzinfo = lizenzinfo;
     }
-
 
 }

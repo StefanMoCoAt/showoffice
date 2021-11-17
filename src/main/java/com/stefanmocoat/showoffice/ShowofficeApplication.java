@@ -1,29 +1,22 @@
 package com.stefanmocoat.showoffice;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Year;
-import java.util.Date;
-
 import com.stefanmocoat.showoffice.jpa.entities.*;
+import com.stefanmocoat.showoffice.service.PferdService;
+import com.stefanmocoat.showoffice.service.ReiterService;
+import com.stefanmocoat.showoffice.service.TurnierService;
+import com.stefanmocoat.showoffice.service.VereinService;
 import com.stefanmocoat.showoffice.service.imports.ImportPferde;
+import com.stefanmocoat.showoffice.service.imports.ImportReiter;
+import com.stefanmocoat.showoffice.service.imports.ImportRichterParcous;
 import com.stefanmocoat.showoffice.service.imports.ImportVerein;
+import com.vaadin.flow.component.dependency.NpmPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.stefanmocoat.showoffice.service.PferdService;
-import com.stefanmocoat.showoffice.service.PferdeFarbeService;
-import com.stefanmocoat.showoffice.service.ReiterService;
-import com.stefanmocoat.showoffice.service.TurnierService;
-import com.stefanmocoat.showoffice.service.VereinService;
-import com.stefanmocoat.showoffice.service.imports.ImportReiter;
-import com.stefanmocoat.showoffice.service.imports.ImportRichterParcous;
-import com.vaadin.flow.component.dependency.NpmPackage;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 @SpringBootApplication
 @NpmPackage(value = "lumo-css-framework", version = "^4.0.10")
@@ -36,18 +29,20 @@ public class ShowofficeApplication implements CommandLineRunner {
 	 * @Autowired TurnierService tournierService;
 	 */
 
+	// ZNS-Listen Importe
 	@Autowired
-	ImportRichterParcous importRichterParcour;
+	ImportVerein importVerein;
 
 	@Autowired
-	ImportReiter importReiter;
+	ImportRichterParcous importRichterParcour;
 
 	@Autowired
 	ImportPferde importPferde;
 
 	@Autowired
-	ImportVerein importVerein;
+	ImportReiter importReiter;
 
+	// Service
 	@Autowired
 	VereinService vereinService;
 
@@ -69,8 +64,8 @@ public class ShowofficeApplication implements CommandLineRunner {
 
 		importVerein.doImport();
 		importRichterParcour.doImport();
-		importReiter.doImport();
 		importPferde.doImport();
+		importReiter.doImport();
 		
 		importTurnier();
 
@@ -93,66 +88,6 @@ public class ShowofficeApplication implements CommandLineRunner {
 		 * System.out.println(t); }
 		 */
 	}
-
-//	private void importVerein() {
-//		try {
-//
-//			addKeinVerein();
-//
-//			BufferedReader reader = new BufferedReader(new FileReader("zns_daten/VEREIN01_TEST.dat")); // ,
-//																										// Charset.forName("Cp850")
-//			String line = reader.readLine();
-//			while (line != null) {
-//				String vereinNr = line.substring(0, 4);
-//				String vereinName = line.substring(4).trim();
-//
-//				addVerein(vereinNr, vereinName);
-//				line = reader.readLine();
-//			}
-//		} catch (IOException e) {
-//			throw new IllegalStateException(e);
-//		}
-//	}
-//
-//	private void addKeinVerein() {
-//		// import 0000 Verein -> vereinslos
-//		Verein verein = vereinService.findByVereinId("0000");
-//
-//		boolean insert = false;
-//		if (verein == null) {
-//			insert = true;
-//			verein = new Verein();
-//			verein.setVereinId("0000");
-//		}
-//
-//		verein.setVereinName("kein Verein");
-//
-//		if (insert) {
-//			vereinService.add(verein);
-//		} else {
-//			vereinService.update(verein);
-//		}
-//	}
-//
-//	private void addVerein(String vereinNr, String vereinName) {
-//
-//		Verein verein = vereinService.findByVereinId(vereinNr);
-//
-//		boolean insert = false;
-//		if (verein == null) {
-//			insert = true;
-//			verein = new Verein();
-//			verein.setVereinId(vereinNr);
-//		}
-//
-//		verein.setVereinName(vereinName);
-//
-//		if (insert) {
-//			vereinService.add(verein);
-//		} else {
-//			vereinService.update(verein);
-//		}
-//	}
 
 	private void importTurnier() {
 
@@ -186,30 +121,5 @@ public class ShowofficeApplication implements CommandLineRunner {
 
 		System.out.println(t2);
 
-//		try (BufferedReader reader = new BufferedReader(new FileReader("zns_daten/PFERDE01_TEST.dat"))) {
-//			String line = reader.readLine();
-//			while (line != null) {
-//				String pferdKopfnummer = line.substring(0, 4);
-//				String pferdPferdename = line.substring(4, 34).trim();
-//				String pferdLebensnummer = line.substring(34, 43);
-//				String pferdGeschlecht = line.substring(43, 44);
-//				String pferdGebJahr = line.substring(44, 48);
-//				String pferdFarbe = line.substring(48, 63).trim();
-//				String pferdAbstammung = line.substring(63, 78).trim();
-//				String pferdVereinNr = line.substring(78, 82);
-//				String pferdLetzteZahlungJahr = line.substring(82, 86);
-//				String pferdVerantwortlichePerson = line.substring(86, 161).trim();
-//				String pferdVater = line.substring(161, 191).trim();
-//				String pferdFeiPass = line.substring(191, 199).trim();
-//				String pferdSatznummerDesPferdes = line.substring(199).trim();
-//
-//				addPferd(pferdKopfnummer, pferdPferdename, pferdLebensnummer, pferdGeschlecht, pferdGebJahr, pferdFarbe,
-//						pferdAbstammung, pferdVereinNr, pferdLetzteZahlungJahr, pferdVerantwortlichePerson, pferdVater,
-//						pferdFeiPass, pferdSatznummerDesPferdes);
-//				line = reader.readLine();
-//			}
-//		} catch (IOException e) {
-//			throw new IllegalStateException(e);
-//		}
 	}
 }

@@ -3,14 +3,16 @@ package com.stefanmocoat.showoffice.service.imports;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
 
-import com.stefanmocoat.showoffice.jpa.entities.Bundesland;
-import com.stefanmocoat.showoffice.jpa.entities.Lizenz;
+import com.stefanmocoat.showoffice.jpa.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.stefanmocoat.showoffice.jpa.entities.Reiter;
-import com.stefanmocoat.showoffice.jpa.entities.Verein;
 import com.stefanmocoat.showoffice.service.ReiterService;
 import com.stefanmocoat.showoffice.service.VereinService;
 
@@ -70,11 +72,11 @@ public class ImportReiter implements IImport {
 	}
 
 	private void addReiter(String satzNrReiter, String familienname, String vorname,
-			String budesland, String vereinsname, String nationalitaet, String lizenz,
-			String startkarte, String fahrlizenz, String altersKlJgJrU25, String altersKlY,
-			String mitgliedsNr, String telNr, String kader,
-			String letzteZahlungJahr, String geschlecht, String gebDatum, String feiId,
-			String sperrliste, String lizenzinfo) {
+						   String budesland, String vereinsname, String nationalitaet, String lizenz,
+						   String startkarte, String fahrlizenz, String altersKlJgJrU25, String altersKlY,
+						   String mitgliedsNr, String telNr, String kader,
+						   String letzteZahlungJahr, String geschlecht, String gebDatum, String feiId,
+						   String sperrliste, String lizenzinfo) {
 
 		Reiter reiter = reiterService.findBySatzNrReiter(satzNrReiter);
 
@@ -98,16 +100,23 @@ public class ImportReiter implements IImport {
 		reiter.setLizenz(Lizenz.findByCode(lizenz));
 
 		reiter.setStartkarte(startkarte);
-		reiter.setFahrlizenz(fahrlizenz);
-		reiter.setAltersKlJgJrU25(altersKlJgJrU25);
-		reiter.setAltersKlY(altersKlY);
+		reiter.setFahrlizenz(Lizenz.findByCode(fahrlizenz));
+		reiter.setAltersKlJgJrU25(AltersKlasse.findByCode(altersKlJgJrU25));
+		reiter.setAltersKlY(AltersKlasse.findByCode(altersKlY));
 		reiter.setMitgliedsnummer(mitgliedsNr);
 		reiter.setVerein(verein);
 		reiter.setTelefonnummer(telNr);
 		reiter.setKader(kader);
 		reiter.setLetzteZahlungJahr(letzteZahlungJahr);
-		reiter.setGeschlecht(geschlecht);
-		reiter.setGeburtsdatum(gebDatum);
+		reiter.setGeschlecht(ReiterGeschlecht.findByCode(geschlecht));
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		try {
+			reiter.setGeburtsdatum(formatter.parse(gebDatum));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
 		reiter.setFeiId(feiId);
 		reiter.setSperrliste(sperrliste);
 		reiter.setLizenzinfo(lizenzinfo);
