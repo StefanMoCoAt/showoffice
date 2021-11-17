@@ -19,8 +19,9 @@ public class Reiter extends AbstractEntity {
     @Column
     private String vorname;
 
-    @Column(length = 2)
-    private String budesland;
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Bundesland budesland;
 
     @Column(length = 50)
     private String vereinsname;
@@ -108,11 +109,11 @@ public class Reiter extends AbstractEntity {
         this.vorname = vorname;
     }
 
-    public String getBudesland() {
+    public Bundesland getBudesland() {
         return budesland;
     }
 
-    public void setBudesland(String budesland) {
+    public void setBudesland(Bundesland budesland) {
         this.budesland = budesland;
     }
 

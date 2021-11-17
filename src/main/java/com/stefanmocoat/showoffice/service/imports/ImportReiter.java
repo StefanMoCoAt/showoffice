@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import com.stefanmocoat.showoffice.jpa.entities.Bundesland;
 import com.stefanmocoat.showoffice.jpa.entities.Lizenz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,9 +42,7 @@ public class ImportReiter implements IImport {
 				String budesland = line.substring(81, 83); // 2
 				String vereinsname = line.substring(83, 133).trim(); // 50
 				String nationalitaet = line.substring(133, 136); // 3
-
 				String lizenz = line.substring(136, 140).trim(); // 4
-
 				String startkarte = line.substring(140, 141).trim(); // 1
 				String fahrlizenz = line.substring(141, 143).trim(); // 2
 				String altersKlJgJrU25 = line.substring(143, 145).trim(); // 2
@@ -90,7 +89,9 @@ public class ImportReiter implements IImport {
 
 		reiter.setFamilienname(familienname);
 		reiter.setVorname(vorname);
-		reiter.setBudesland(budesland);
+
+		reiter.setBudesland(Bundesland.findByCode(budesland));
+
 		reiter.setVereinsname(vereinsname);
 		reiter.setNationalitaet(nationalitaet);
 

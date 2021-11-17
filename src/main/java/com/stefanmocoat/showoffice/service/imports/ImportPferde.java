@@ -106,6 +106,7 @@ public class ImportPferde implements IImport {
 
         PferdeFarbe pfarbe = addPferdFarbeIfNotExists(farbe);
         PferdAbstammung pAbstammung = addPferdAbstammungIfMotExists(abstammung);
+
         Verein verein = vereinService.findByVereinId(vereinNr);
 
         pferd.setPferdename(name);

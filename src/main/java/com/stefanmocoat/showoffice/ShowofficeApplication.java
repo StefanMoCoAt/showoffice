@@ -10,6 +10,7 @@ import java.util.Date;
 
 import com.stefanmocoat.showoffice.jpa.entities.*;
 import com.stefanmocoat.showoffice.service.imports.ImportPferde;
+import com.stefanmocoat.showoffice.service.imports.ImportVerein;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -45,6 +46,9 @@ public class ShowofficeApplication implements CommandLineRunner {
 	ImportPferde importPferde;
 
 	@Autowired
+	ImportVerein importVerein;
+
+	@Autowired
 	VereinService vereinService;
 
 	@Autowired
@@ -63,8 +67,7 @@ public class ShowofficeApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		importVerein();
-
+		importVerein.doImport();
 		importRichterParcour.doImport();
 		importReiter.doImport();
 		importPferde.doImport();
@@ -91,150 +94,65 @@ public class ShowofficeApplication implements CommandLineRunner {
 		 */
 	}
 
-	/*private void importPferd() {
-
-		PferdeGeschlecht pferdeGeschlecht;
-
-		try (BufferedReader reader = new BufferedReader(new FileReader("zns_daten/PFERDE01_TEST.dat"))) {
-			String line = reader.readLine();
-			while (line != null) {
-				String kopfNr = line.substring(0, 4);
-				String name = line.substring(4, 34).trim();
-				String lebensNr = line.substring(34, 43);
-
-				String inGeschlecht = line.substring(43, 44);
-				PferdeGeschlecht geschlecht = PferdeGeschlecht.findByCode(inGeschlecht);
-
-				Year gebJahr = Year.of(Integer.parseInt(line.substring(44, 48)));
-				String farbe = line.substring(48, 63).trim();
-				String abstammung = line.substring(63, 78).trim();
-				String vereinNr = line.substring(78, 82);
-				String letzteZahlungJahr = line.substring(82, 86);
-				String verantwortlichePerson = line.substring(86, 161).trim();
-				String vater = line.substring(161, 191).trim();
-				String feiPass = line.substring(191, 199).trim();
-				String satzNr = line.substring(199).trim();
-
-				addPferd(kopfNr, name, lebensNr, geschlecht, gebJahr, farbe,
-						abstammung, vereinNr, letzteZahlungJahr, verantwortlichePerson, vater,
-						feiPass, satzNr);
-				line = reader.readLine();
-			}
-		} catch (IOException e) {
-			throw new IllegalStateException(e);
-		}
-	}
-
-	private PferdeFarbe addPferdFarbeIfNotExists(String farbe) {
-		String trimmedQual = farbe.trim();
-		PferdeFarbe pferdeFarbe = pferdeFarbeService.findByFarbe(farbe);
-		if (pferdeFarbe == null) {
-			pferdeFarbe = new PferdeFarbe();
-			pferdeFarbe.setFarbe(trimmedQual);
-			pferdeFarbeService.add(pferdeFarbe);
-		}
-
-		return pferdeFarbeService.findByFarbe(farbe);
-	}
-
-	private void addPferd(String kopfNr, String name, String lebensNr,
-						  PferdeGeschlecht geschlecht, Year gebJahr, String farbe, String abstammung,
-						  String vereinNr, String letzteZahlungJahr, String verantwortlichePerson, String vater,
-						  String feiPass, String satzNr) {
-
-		Pferd pferd = pferdService.findByKopfnummer(kopfNr);
-
-		boolean insert = false;
-		if (pferd == null) {
-			insert = true;
-			pferd = new Pferd();
-			pferd.setKopfnummer(kopfNr);
-		}
-
-		PferdeFarbe pfarbe = addPferdFarbeIfNotExists(farbe);
-		Verein verein = vereinService.findByVereinId(vereinNr);
-
-		pferd.setPferdename(name);
-		pferd.setLebensnummer(lebensNr);
-
-		pferd.setGeschlecht(geschlecht);
-
-		pferd.setGebJahr(gebJahr);
-		pferd.setFarbe(pfarbe);
-		pferd.setAbstammung(abstammung);
-		pferd.setVerein(verein);
-		pferd.setLetzteZahlungJahr(letzteZahlungJahr);
-		pferd.setVerantwortlichePerson(verantwortlichePerson);
-		pferd.setVater(vater);
-		pferd.setFeiPass(feiPass);
-		pferd.setSatznummerDesPferdes(satzNr);
-
-		if (insert) {
-			pferdService.add(pferd);
-		} else {
-			pferdService.update(pferd);
-		}
-	}
-*/
-	private void importVerein() {
-		try {
-
-			addKeinVerein();
-
-			BufferedReader reader = new BufferedReader(new FileReader("zns_daten/VEREIN01_TEST.dat")); // ,
-																										// Charset.forName("Cp850")
-			String line = reader.readLine();
-			while (line != null) {
-				String vereinNr = line.substring(0, 4);
-				String vereinName = line.substring(4).trim();
-
-				addVerein(vereinNr, vereinName);
-				line = reader.readLine();
-			}
-		} catch (IOException e) {
-			throw new IllegalStateException(e);
-		}
-	}
-
-	private void addKeinVerein() {
-		// import 0000 Verein -> vereinslos
-		Verein verein = vereinService.findByVereinId("0000");
-
-		boolean insert = false;
-		if (verein == null) {
-			insert = true;
-			verein = new Verein();
-			verein.setVereinId("0000");
-		}
-
-		verein.setVereinName("kein Verein");
-
-		if (insert) {
-			vereinService.add(verein);
-		} else {
-			vereinService.update(verein);
-		}
-	}
-
-	private void addVerein(String vereinNr, String vereinName) {
-
-		Verein verein = vereinService.findByVereinId(vereinNr);
-
-		boolean insert = false;
-		if (verein == null) {
-			insert = true;
-			verein = new Verein();
-			verein.setVereinId(vereinNr);
-		}
-
-		verein.setVereinName(vereinName);
-
-		if (insert) {
-			vereinService.add(verein);
-		} else {
-			vereinService.update(verein);
-		}
-	}
+//	private void importVerein() {
+//		try {
+//
+//			addKeinVerein();
+//
+//			BufferedReader reader = new BufferedReader(new FileReader("zns_daten/VEREIN01_TEST.dat")); // ,
+//																										// Charset.forName("Cp850")
+//			String line = reader.readLine();
+//			while (line != null) {
+//				String vereinNr = line.substring(0, 4);
+//				String vereinName = line.substring(4).trim();
+//
+//				addVerein(vereinNr, vereinName);
+//				line = reader.readLine();
+//			}
+//		} catch (IOException e) {
+//			throw new IllegalStateException(e);
+//		}
+//	}
+//
+//	private void addKeinVerein() {
+//		// import 0000 Verein -> vereinslos
+//		Verein verein = vereinService.findByVereinId("0000");
+//
+//		boolean insert = false;
+//		if (verein == null) {
+//			insert = true;
+//			verein = new Verein();
+//			verein.setVereinId("0000");
+//		}
+//
+//		verein.setVereinName("kein Verein");
+//
+//		if (insert) {
+//			vereinService.add(verein);
+//		} else {
+//			vereinService.update(verein);
+//		}
+//	}
+//
+//	private void addVerein(String vereinNr, String vereinName) {
+//
+//		Verein verein = vereinService.findByVereinId(vereinNr);
+//
+//		boolean insert = false;
+//		if (verein == null) {
+//			insert = true;
+//			verein = new Verein();
+//			verein.setVereinId(vereinNr);
+//		}
+//
+//		verein.setVereinName(vereinName);
+//
+//		if (insert) {
+//			vereinService.add(verein);
+//		} else {
+//			vereinService.update(verein);
+//		}
+//	}
 
 	private void importTurnier() {
 
