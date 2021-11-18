@@ -16,14 +16,31 @@ public class ImportReiterTest {
 
 	@Test
     void testParseReiter() {
-		String line = "100050Fuchs                                             Trinity Petra            05LVLR OG Reitclub Alpe Adria                       AUTR1S2      519700030664 4082261          2009W1964081910025560                       ";
+		String line = "123456Mustermann                                        Maximilian               01MusterReitstall St. Münster                       AUTR1D2SF1JGY12345678123456789012345678901K1999M20200101FEI456789ZSLizenzinfo";
 		
 		// TODO - erzeuge eine line mit allen informationen und teste dann
 		Reiter reiter = importReiter.parseIntoPrototype(line);
-		assertEquals("100050", reiter.getSatzNrReiter());
-		assertEquals("Fuchs", reiter.getFamilienname());
-		assertEquals("Trinity Petra", reiter.getVorname());
-		
+		assertEquals("123456", reiter.getSatzNrReiter());
+		assertEquals("Mustermann", reiter.getFamilienname());
+		assertEquals("Maximilian", reiter.getVorname());
+		assertEquals("01", reiter.getBudesland().getLaedercode());
+		assertEquals("MusterReitstall St. Münster", reiter.getVereinsname());
+		assertEquals("AUT", reiter.getNationalitaet());
+		assertEquals("R1D2", reiter.getLizenz().getCode());
+		assertEquals("S", reiter.getStartkarte());
+		assertEquals("F1", reiter.getFahrlizenz().getCode());
+		assertEquals("JG", reiter.getAltersKlJgJrU25().getWerte());
+		assertEquals("Y", reiter.getAltersKlY().getWerte());
+		assertEquals("12345678", reiter.getMitgliedsnummer());
+		assertEquals("123456789012345678901", reiter.getTelefonnummer());
+		assertEquals("K", reiter.getKader());
+		assertEquals("1999", reiter.getLetzteZahlungJahr());
+		assertEquals("M", reiter.getGeschlecht().getCode());
+		assertEquals("20200101", reiter.getGeburtsdatum());
+		assertEquals("FEI456789Z", reiter.getFeiId());
+		assertEquals("S", reiter.getSperrliste());
+		assertEquals("Lizenzinfo", reiter.getLizenzinfo());
+
 	}
 	
 }

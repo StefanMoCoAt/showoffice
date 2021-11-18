@@ -78,14 +78,10 @@ public class ImportReiter implements IImport {
 		prototype.setSatzNrReiter(satzNrReiter);
 		prototype.setFamilienname(familienname);
 		prototype.setVorname(vorname);
-
 		prototype.setBudesland(Bundesland.findByCode(budesland));
-
 		prototype.setVereinsname(vereinsname);
 		prototype.setNationalitaet(nationalitaet);
-
 		prototype.setLizenz(Lizenz.findByCode(lizenz));
-
 		prototype.setStartkarte(startkarte);
 		prototype.setFahrlizenz(Lizenz.findByCode(fahrlizenz));
 		prototype.setAltersKlJgJrU25(AltersKlasse.findByCode(altersKlJgJrU25));
@@ -136,7 +132,6 @@ public class ImportReiter implements IImport {
 			reiter.setAltersKlJgJrU25(prototype.getAltersKlJgJrU25());
 			reiter.setAltersKlY(prototype.getAltersKlY());
 			reiter.setMitgliedsnummer(prototype.getMitgliedsnummer());
-			reiter.setVerein(prototype.getVerein());
 			reiter.setTelefonnummer(prototype.getTelefonnummer());
 			reiter.setKader(prototype.getKader());
 			reiter.setLetzteZahlungJahr(prototype.getLetzteZahlungJahr());
