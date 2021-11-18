@@ -3,6 +3,7 @@ package com.stefanmocoat.showoffice.service.imports;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,8 +31,8 @@ public class ImportReiter implements IImport {
 
 	public void doImport() {
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("zns_daten/LIZENZ01_TEST.dat")); // ,
-			// Charset.forName("Cp850")
+			BufferedReader reader = new BufferedReader(new FileReader("zns_daten/LIZENZ01_TestNeu.dat")); // ,
+			// Charset.forName("Cp850");
 			String line = reader.readLine();
 			while (line != null) {
 				if (!(line.length() > 201)) {
