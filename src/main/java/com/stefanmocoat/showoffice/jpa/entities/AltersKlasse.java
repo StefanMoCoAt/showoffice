@@ -18,11 +18,17 @@ public enum AltersKlasse {
     }
 
     public static AltersKlasse findByCode(String werte) {
-        for (AltersKlasse akl : AltersKlasse.values()) {
-            if (akl.getWerte().equals(werte)) {
-                return akl;
-            }
+        switch (werte) {
+            case "JG":
+                return AltersKlasse.JUGENDLICH;
+            case "JR":
+                return AltersKlasse.JUNIOR;
+            case "25":
+                return AltersKlasse.U25;
+            case "Y":
+                return AltersKlasse.JUNGERREITER;
+            default:
+                return null;
         }
-        return null;
     }
 }
