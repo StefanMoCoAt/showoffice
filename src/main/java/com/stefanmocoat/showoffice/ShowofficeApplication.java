@@ -63,11 +63,11 @@ public class ShowofficeApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		importVerein.doImport();
-		importRichterParcour.doImport();
-		importPferde.doImport();
-		importReiter.doImport();
-		
-		importTurnier();
+//		importRichterParcour.doImport();
+//		importPferde.doImport();
+//		importReiter.doImport();
+//		
+//		importTurnier();
 
 		/*
 		 * TURIERBEZEICHNUNG t1 = new TURIERBEZEICHNUNG(); t1.setName("Dressur");

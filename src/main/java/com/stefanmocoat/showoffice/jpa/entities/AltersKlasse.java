@@ -18,7 +18,7 @@ public enum AltersKlasse {
     }
 
     public static AltersKlasse findByCode(String werte) {
-        switch (werte) {
+        switch (werte.trim()) {
             case "JG":
                 return AltersKlasse.JUGENDLICH;
             case "JR":
