@@ -1,19 +1,13 @@
 package com.stefanmocoat.showoffice.service.imports;
 
-import static org.junit.Assert.assertSame;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.text.SimpleDateFormat;
-
+import com.stefanmocoat.showoffice.jpa.entities.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.stefanmocoat.showoffice.jpa.entities.AltersKlasse;
-import com.stefanmocoat.showoffice.jpa.entities.Bundesland;
-import com.stefanmocoat.showoffice.jpa.entities.Lizenz;
-import com.stefanmocoat.showoffice.jpa.entities.Reiter;
-import com.stefanmocoat.showoffice.jpa.entities.ReiterGeschlecht;
+import java.text.SimpleDateFormat;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class ImportReiterTest {
@@ -27,8 +21,8 @@ public class ImportReiterTest {
 	void testParseReiter() {
 		String line = "123456Mustermann                                        Maximilian               01MusterReitstall St. Münster                       AUTR1D2SF1JGY12345678123456789012345678901K1999M20200101FEI456789ZSLizenzinfo";
 
-		// TODO - erzeuge eine line mit allen informationen und teste dann
 		Reiter reiter = importReiter.parseIntoPrototype(line);
+
 		assertEquals("123456", reiter.getSatzNrReiter());
 		assertEquals("Mustermann", reiter.getFamilienname());
 		assertEquals("Maximilian", reiter.getVorname());

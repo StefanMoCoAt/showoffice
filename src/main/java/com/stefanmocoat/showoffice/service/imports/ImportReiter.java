@@ -32,7 +32,6 @@ public class ImportReiter implements IImport {
 
 	public void doImport() {
 		try (BufferedReader reader = new BufferedReader(new FileReader("zns_daten/LIZENZ01_TEST.dat"))) {
-			// ,
 			// Charset.forName("Cp850");
 			String line = reader.readLine();
 			while (line != null) {

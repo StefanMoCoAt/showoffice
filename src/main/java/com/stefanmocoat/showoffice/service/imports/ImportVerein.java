@@ -10,7 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 @Component
-public class ImportVerein implements IImport{
+public class ImportVerein implements IImport {
 
     @Autowired
     VereinService vereinService;
@@ -27,10 +27,10 @@ public class ImportVerein implements IImport{
             // Charset.forName("Cp850")
             String line = reader.readLine();
             while (line != null) {
-                String vereinNr = line.substring(0, 4);
-                String vereinName = line.substring(4).trim();
-
-                addVerein(vereinNr, vereinName);
+                Verein prototype = parseIntoPrototype(line);
+                if (prototype != null) {
+                    addOrUpdateVerein(prototype);
+                }
                 line = reader.readLine();
             }
         } catch (IOException e) {
@@ -58,26 +58,38 @@ public class ImportVerein implements IImport{
         }
     }
 
-    private void addVerein(String vereinNr, String vereinName) {
+    Verein parseIntoPrototype(String line) {
+        if (line.length() < 5) {
+            return null;
+        }
+        String vereinNr = line.substring(0, 4);
+        String vereinName = line.substring(4).trim();
 
-        Verein verein = vereinService.findByVereinId(vereinNr);
+        Verein prototype = new Verein();
+
+        prototype.setVereinId(vereinNr);
+        prototype.setVereinName(vereinName);
+
+        return prototype;
+    }
+
+    private void addOrUpdateVerein(Verein prototype) {
+
+        Verein verein = vereinService.findByVereinId(prototype.getVereinId());
 
         boolean insert = false;
         if (verein == null) {
             insert = true;
-            verein = new Verein();
-            verein.setVereinId(vereinNr);
+        } else {
+            verein.setVereinId(prototype.getVereinId());
+            verein.setVereinName(prototype.getVereinName());
         }
-
-        verein.setVereinName(vereinName);
 
         if (insert) {
-            vereinService.add(verein);
+            vereinService.add(prototype);
         } else {
-            vereinService.update(verein);
+            vereinService.update(prototype);
         }
     }
-
-
 
 }
